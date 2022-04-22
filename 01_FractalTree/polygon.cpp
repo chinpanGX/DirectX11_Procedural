@@ -56,13 +56,9 @@ void Polygon::Init()
 
 void Polygon::Uninit()
 {
-
 	m_VertexBuffer->Release();
-
-
 	m_Texture->Unload();
 	delete m_Texture;
-
 }
 
 

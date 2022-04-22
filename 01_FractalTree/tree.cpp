@@ -5,7 +5,7 @@
 #include "model.h"
 #include "texture.h"
 #include "tree.h"
-
+#include "Random.h"
 
 void Tree::Init()
 {
@@ -78,8 +78,8 @@ void Tree::DrawChild(DirectX::XMMATRIX Parent, float Scale)
 		z = (float)rand() / RAND_MAX * 1.0f - 0.5f;
 
 		// ‘å‚«‚³‚Ì•â³’l‚Ì—”
-		float offset = (float)rand() / RAND_MAX * 1.0f - 0.5f;
-
+		//float offset = (float)rand() / RAND_MAX * 1.0f - 0.5f;
+		float offset = (float)Random::Rand_R(1, 5) * 0.05f;
 
 		DirectX::XMMATRIX world;
 		world = DirectX::XMMatrixScaling(Scale, Scale + offset, Scale);

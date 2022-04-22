@@ -94,6 +94,9 @@
     <ClInclude Include="model.h">
       <Filter>ソース ファイル\resource</Filter>
     </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>ソース ファイル\system</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="vertexShader.hlsl">
