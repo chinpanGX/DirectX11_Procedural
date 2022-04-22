@@ -12,5 +12,5 @@ public:
 	void Uninit();
 	void Update();
 	void Draw();
-	void DrawChild(XMMATRIX Parent, float Scale);
+	void DrawChild(DirectX::XMMATRIX Parent, float Scale);
 };

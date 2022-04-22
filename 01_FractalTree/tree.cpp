@@ -9,9 +9,9 @@
 
 void Tree::Init()
 {
-	m_Position = XMFLOAT3(0.0f, 0.0f, 0.0f);
-	m_Rotation = XMFLOAT3(0.0f, 0.0f, 0.0f);
-	m_Scale = XMFLOAT3(0.7f, 0.7f, 0.7f);
+	m_Position = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
+	m_Rotation = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
+	m_Scale = DirectX::XMFLOAT3(0.7f, 0.7f, 0.7f);
 
 
 	m_Model = new Model();
@@ -33,9 +33,9 @@ void Tree::Update()
 	m_Rotation.y += 0.01f;
 
 
-	if (CInput::GetKeyTrigger('1'))
+	if (Input::GetKeyTrigger('1'))
 		m_Seed++;
-	if (CInput::GetKeyTrigger('2'))
+	if (Input::GetKeyTrigger('2'))
 		m_Seed--;
 
 }
@@ -46,10 +46,10 @@ void Tree::Draw()
 	srand(m_Seed);
 
 	// マトリクス設定
-	XMMATRIX world;
-	world = XMMatrixScaling(m_Scale.x, m_Scale.y, m_Scale.z);
-	world *= XMMatrixRotationRollPitchYaw(m_Rotation.x, m_Rotation.y, m_Rotation.z);
-	world *= XMMatrixTranslation(m_Position.x, m_Position.y, m_Position.z);
+	DirectX::XMMATRIX world;
+	world = DirectX::XMMatrixScaling(m_Scale.x, m_Scale.y, m_Scale.z);
+	world *= DirectX::XMMatrixRotationRollPitchYaw(m_Rotation.x, m_Rotation.y, m_Rotation.z);
+	world *= DirectX::XMMatrixTranslation(m_Position.x, m_Position.y, m_Position.z);
 	Renderer::SetWorldMatrix(&world);
 
 	m_Model->Draw();
@@ -61,7 +61,7 @@ void Tree::Draw()
 
 
 //再帰的に枝描画/////////////////////////////////////////////////
-void Tree::DrawChild(XMMATRIX Parent, float Scale)
+void Tree::DrawChild(DirectX::XMMATRIX Parent, float Scale)
 {
 	// 大きさが0.5f以下になったら、再帰処理をやめる
 	if (Scale < 0.5f)
@@ -81,10 +81,10 @@ void Tree::DrawChild(XMMATRIX Parent, float Scale)
 		float offset = (float)rand() / RAND_MAX * 1.0f - 0.5f;
 
 
-		XMMATRIX world;
-		world = XMMatrixScaling(Scale, Scale + offset, Scale);
-		world *= XMMatrixRotationRollPitchYaw(x, 0.0f, z);
-		world *= XMMatrixTranslation(0.0f, 2.0f, 0.0f); // Yが2.0fなのは、先端から枝を生やすため
+		DirectX::XMMATRIX world;
+		world = DirectX::XMMatrixScaling(Scale, Scale + offset, Scale);
+		world *= DirectX::XMMatrixRotationRollPitchYaw(x, 0.0f, z);
+		world *= DirectX::XMMatrixTranslation(0.0f, 2.0f, 0.0f); // Yが2.0fなのは、先端から枝を生やすため
 		world *= Parent;
 		Renderer::SetWorldMatrix(&world);
 

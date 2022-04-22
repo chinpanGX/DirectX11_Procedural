@@ -1,25 +1,22 @@
 #pragma once
-
 #include <list>
 #include "main.h"
-
 #include "game_object.h"
 #include "model.h"
 #include "texture.h"
-
 #include "camera.h"
 #include "field.h"
 #include "tree.h"
 #include "polygon.h"
 
-class CScene
+class Scene
 {
 protected:
 	std::list<GameObject*>	m_GameObject;
 
 public:
-	CScene(){}
-	virtual ~CScene(){}
+	Scene(){}
+	virtual ~Scene(){}
 
 
 	virtual void Init()

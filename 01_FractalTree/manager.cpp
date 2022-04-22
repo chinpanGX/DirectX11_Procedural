@@ -1,4 +1,3 @@
-
 #include "main.h"
 #include "manager.h"
 #include "input.h"
@@ -8,41 +7,40 @@
 #include "polygon.h"
 #include "model.h"
 
-CScene*	g_Scene;
+Scene*	g_Scene;
 
-
-void CManager::Init()
+void Manager::Init()
 {
 
 	Renderer::Init();
-	CInput::Init();
+	Input::Init();
 
-	g_Scene = new CScene();
+	g_Scene = new Scene();
 	g_Scene->Init();
 
 }
 
-void CManager::Uninit()
+void Manager::Uninit()
 {
 
 	g_Scene->Uninit();
 	delete g_Scene;
 
-	CInput::Uninit();
+	Input::Uninit();
 	Renderer::Uninit();
 
 }
 
-void CManager::Update()
+void Manager::Update()
 {
 
-	CInput::Update();
+	Input::Update();
 
 	g_Scene->Update();
 
 }
 
-void CManager::Draw()
+void Manager::Draw()
 {
 
 	Renderer::Begin();

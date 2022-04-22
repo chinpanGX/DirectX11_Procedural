@@ -1,20 +1,14 @@
-
 #include "main.h"
 #include "renderer.h"
 #include "texture.h"
 #include <io.h>
 
-
 D3D_FEATURE_LEVEL       Renderer::m_FeatureLevel = D3D_FEATURE_LEVEL_11_0;
-
 ID3D11Device*           Renderer::m_D3DDevice = NULL;
 ID3D11DeviceContext*    Renderer::m_ImmediateContext = NULL;
 IDXGISwapChain*         Renderer::m_SwapChain = NULL;
 ID3D11RenderTargetView* Renderer::m_RenderTargetView = NULL;
 ID3D11DepthStencilView* Renderer::m_DepthStencilView = NULL;
-
-
-
 ID3D11VertexShader*     Renderer::m_VertexShader = NULL;
 ID3D11PixelShader*      Renderer::m_PixelShader = NULL;
 ID3D11InputLayout*      Renderer::m_VertexLayout = NULL;
@@ -23,11 +17,8 @@ ID3D11Buffer*			Renderer::m_ViewBuffer = NULL;
 ID3D11Buffer*			Renderer::m_ProjectionBuffer = NULL;
 ID3D11Buffer*			Renderer::m_MaterialBuffer = NULL;
 ID3D11Buffer*			Renderer::m_LightBuffer = NULL;
-
 ID3D11DepthStencilState* Renderer::m_DepthStateEnable;
 ID3D11DepthStencilState* Renderer::m_DepthStateDisable;
-
-
 
 void Renderer::Init()
 {
@@ -243,7 +234,7 @@ void Renderer::Init()
 
 	// 定数バッファ生成
 	D3D11_BUFFER_DESC hBufferDesc;
-	hBufferDesc.ByteWidth = sizeof(XMMATRIX);
+	hBufferDesc.ByteWidth = sizeof(DirectX::XMMATRIX);
 	hBufferDesc.Usage = D3D11_USAGE_DEFAULT;
 	hBufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 	hBufferDesc.CPUAccessFlags = 0;
@@ -286,7 +277,7 @@ void Renderer::Init()
 
 	// ライト初期化
 	LIGHT light;
-	light.Direction = XMFLOAT4(0.0f, -1.0f, 0.0f, 0.0f);
+	light.Direction = DirectX::XMFLOAT4(0.0f, -1.0f, 0.0f, 0.0f);
 	light.Diffuse = COLOR(0.9f, 0.9f, 0.9f, 1.0f);
 	light.Ambient = COLOR(0.1f, 0.1f, 0.1f, 1.0f);
 	SetLight(light);
@@ -355,41 +346,41 @@ void Renderer::SetDepthEnable( bool Enable )
 
 void Renderer::SetWorldViewProjection2D()
 {
-	XMMATRIX world;
-	world = XMMatrixIdentity();
-	m_ImmediateContext->UpdateSubresource(m_WorldBuffer, 0, NULL, &XMMatrixTranspose(world), 0, 0);
+	DirectX::XMMATRIX world;
+	world = DirectX::XMMatrixIdentity();
+	m_ImmediateContext->UpdateSubresource(m_WorldBuffer, 0, NULL, &DirectX::XMMatrixTranspose(world), 0, 0);
 
-	XMMATRIX view;
-	view = XMMatrixIdentity();
-	m_ImmediateContext->UpdateSubresource(m_ViewBuffer, 0, NULL, &XMMatrixTranspose(view), 0, 0);
+	DirectX::XMMATRIX view;
+	view = DirectX::XMMatrixIdentity();
+	m_ImmediateContext->UpdateSubresource(m_ViewBuffer, 0, NULL, &DirectX::XMMatrixTranspose(view), 0, 0);
 
-	XMMATRIX projection;
-	projection = XMMatrixOrthographicOffCenterLH( 0.0f, SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f, 0.0f, 1.0f );
-	m_ImmediateContext->UpdateSubresource( m_ProjectionBuffer, 0, NULL, &XMMatrixTranspose(projection), 0, 0 );
+	DirectX::XMMATRIX projection;
+	projection = DirectX::XMMatrixOrthographicOffCenterLH( 0.0f, SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f, 0.0f, 1.0f );
+	m_ImmediateContext->UpdateSubresource( m_ProjectionBuffer, 0, NULL, &DirectX::XMMatrixTranspose(projection), 0, 0 );
 
 }
 
 
-void Renderer::SetWorldMatrix( XMMATRIX *WorldMatrix )
+void Renderer::SetWorldMatrix( DirectX::XMMATRIX *WorldMatrix )
 {
-	XMMATRIX world;
+	DirectX::XMMATRIX world;
 	world = *WorldMatrix;
-	m_ImmediateContext->UpdateSubresource(m_WorldBuffer, 0, NULL, &XMMatrixTranspose(world), 0, 0);
+	m_ImmediateContext->UpdateSubresource(m_WorldBuffer, 0, NULL, &DirectX::XMMatrixTranspose(world), 0, 0);
 
 }
 
-void Renderer::SetViewMatrix( XMMATRIX *ViewMatrix )
+void Renderer::SetViewMatrix( DirectX::XMMATRIX *ViewMatrix )
 {
-	XMMATRIX view;
+	DirectX::XMMATRIX view;
 	view = *ViewMatrix;
-	m_ImmediateContext->UpdateSubresource(m_ViewBuffer, 0, NULL, &XMMatrixTranspose(view), 0, 0);
+	m_ImmediateContext->UpdateSubresource(m_ViewBuffer, 0, NULL, &DirectX::XMMatrixTranspose(view), 0, 0);
 }
 
-void Renderer::SetProjectionMatrix( XMMATRIX *ProjectionMatrix )
+void Renderer::SetProjectionMatrix( DirectX::XMMATRIX *ProjectionMatrix )
 {
-	XMMATRIX projection;
+	DirectX::XMMATRIX projection;
 	projection = *ProjectionMatrix;
-	m_ImmediateContext->UpdateSubresource(m_ProjectionBuffer, 0, NULL, &XMMatrixTranspose(projection), 0, 0);
+	m_ImmediateContext->UpdateSubresource(m_ProjectionBuffer, 0, NULL, &DirectX::XMMatrixTranspose(projection), 0, 0);
 }
 
 

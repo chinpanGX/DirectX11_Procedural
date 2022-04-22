@@ -11,8 +11,8 @@
 void Camera::Init()
 {
 
-	m_Position = XMFLOAT3( 0.0f, 9.0f, -10.0f );
-	m_Rotation = XMFLOAT3( 0.5f, 0.0f, 0.0f );
+	m_Position = DirectX::XMFLOAT3( 0.0f, 9.0f, -10.0f );
+	m_Rotation = DirectX::XMFLOAT3( 0.5f, 0.0f, 0.0f );
 
 
 	m_Viewport.left = 0;
@@ -41,9 +41,9 @@ void Camera::Update()
 void Camera::Draw()
 {
 
-	XMMATRIX	m_ViewMatrix;
-	XMMATRIX	m_InvViewMatrix;
-	XMMATRIX	m_ProjectionMatrix;
+	DirectX::XMMATRIX	m_ViewMatrix;
+	DirectX::XMMATRIX	m_InvViewMatrix;
+	DirectX::XMMATRIX	m_ProjectionMatrix;
 
 
 
@@ -61,18 +61,18 @@ void Camera::Draw()
 
 
 	// ビューマトリクス設定
-	m_InvViewMatrix = XMMatrixRotationRollPitchYaw(m_Rotation.x, m_Rotation.y, m_Rotation.z);
-	m_InvViewMatrix *= XMMatrixTranslation(m_Position.x, m_Position.y, m_Position.z);
+	m_InvViewMatrix = DirectX::XMMatrixRotationRollPitchYaw(m_Rotation.x, m_Rotation.y, m_Rotation.z);
+	m_InvViewMatrix *= DirectX::XMMatrixTranslation(m_Position.x, m_Position.y, m_Position.z);
 
-	XMVECTOR det;
-	m_ViewMatrix = XMMatrixInverse(&det, m_InvViewMatrix);
+	DirectX::XMVECTOR det;
+	m_ViewMatrix = DirectX::XMMatrixInverse(&det, m_InvViewMatrix);
 
 	Renderer::SetViewMatrix(&m_ViewMatrix);
 
 
 
 	// プロジェクションマトリクス設定
-	m_ProjectionMatrix = XMMatrixPerspectiveFovLH(1.0f, dxViewport.Width / dxViewport.Height, 1.0f, 1000.0f);
+	m_ProjectionMatrix = DirectX::XMMatrixPerspectiveFovLH(1.0f, dxViewport.Width / dxViewport.Height, 1.0f, 1000.0f);
 
 	Renderer::SetProjectionMatrix(&m_ProjectionMatrix);
 

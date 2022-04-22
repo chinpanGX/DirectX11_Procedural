@@ -13,25 +13,25 @@ void Field::Init()
 {
 	VERTEX_3D vertex[4];
 
-	vertex[0].Position = XMFLOAT3( -10.0f, 0.0f, 10.0f );
-	vertex[0].Normal   = XMFLOAT3( 0.0f, 1.0f, 0.0f );
-	vertex[0].Diffuse  = XMFLOAT4( 1.0f, 1.0f, 1.0f, 1.0f );
-	vertex[0].TexCoord = XMFLOAT2( 0.0f, 0.0f );
+	vertex[0].Position = DirectX::XMFLOAT3( -10.0f, 0.0f, 10.0f );
+	vertex[0].Normal   = DirectX::XMFLOAT3( 0.0f, 1.0f, 0.0f );
+	vertex[0].Diffuse  = DirectX::XMFLOAT4( 1.0f, 1.0f, 1.0f, 1.0f );
+	vertex[0].TexCoord = DirectX::XMFLOAT2( 0.0f, 0.0f );
 
-	vertex[1].Position = XMFLOAT3( 10.0f, 0.0f, 10.0f );
-	vertex[1].Normal   = XMFLOAT3( 0.0f, 1.0f, 0.0f );
-	vertex[1].Diffuse  = XMFLOAT4( 1.0f, 1.0f, 1.0f, 1.0f );
-	vertex[1].TexCoord = XMFLOAT2( 10.0f, 0.0f );
+	vertex[1].Position = DirectX::XMFLOAT3( 10.0f, 0.0f, 10.0f );
+	vertex[1].Normal   = DirectX::XMFLOAT3( 0.0f, 1.0f, 0.0f );
+	vertex[1].Diffuse  = DirectX::XMFLOAT4( 1.0f, 1.0f, 1.0f, 1.0f );
+	vertex[1].TexCoord = DirectX::XMFLOAT2( 10.0f, 0.0f );
 
-	vertex[2].Position = XMFLOAT3( -10.0f, 0.0f, -10.0f );
-	vertex[2].Normal   = XMFLOAT3( 0.0f, 1.0f, 0.0f );
-	vertex[2].Diffuse  = XMFLOAT4( 1.0f, 1.0f, 1.0f, 1.0f );
-	vertex[2].TexCoord = XMFLOAT2( 0.0f, 10.0f );
+	vertex[2].Position = DirectX::XMFLOAT3( -10.0f, 0.0f, -10.0f );
+	vertex[2].Normal   = DirectX::XMFLOAT3( 0.0f, 1.0f, 0.0f );
+	vertex[2].Diffuse  = DirectX::XMFLOAT4( 1.0f, 1.0f, 1.0f, 1.0f );
+	vertex[2].TexCoord = DirectX::XMFLOAT2( 0.0f, 10.0f );
 
-	vertex[3].Position = XMFLOAT3( 10.0f, 0.0f, -10.0f );
-	vertex[3].Normal   = XMFLOAT3( 0.0f, 1.0f, 0.0f );
-	vertex[3].Diffuse  = XMFLOAT4( 1.0f, 1.0f, 1.0f, 1.0f );
-	vertex[3].TexCoord = XMFLOAT2( 10.0f, 10.0f );
+	vertex[3].Position = DirectX::XMFLOAT3( 10.0f, 0.0f, -10.0f );
+	vertex[3].Normal   = DirectX::XMFLOAT3( 0.0f, 1.0f, 0.0f );
+	vertex[3].Diffuse  = DirectX::XMFLOAT4( 1.0f, 1.0f, 1.0f, 1.0f );
+	vertex[3].TexCoord = DirectX::XMFLOAT2( 10.0f, 10.0f );
 
 
 	D3D11_BUFFER_DESC bd;
@@ -53,9 +53,9 @@ void Field::Init()
 		
 
 
-	m_Position = XMFLOAT3( 0.0f, 0.0f, 0.0f );
-	m_Rotation = XMFLOAT3( 0.0f, 0.0f, 0.0f );
-	m_Scale = XMFLOAT3( 1.0f, 1.0f, 1.0f );
+	m_Position = DirectX::XMFLOAT3( 0.0f, 0.0f, 0.0f );
+	m_Rotation = DirectX::XMFLOAT3( 0.0f, 0.0f, 0.0f );
+	m_Scale = DirectX::XMFLOAT3( 1.0f, 1.0f, 1.0f );
 
 }
 
@@ -91,10 +91,10 @@ void Field::Draw()
 	Renderer::SetTexture( m_Texture );
 
 	// マトリクス設定
-	XMMATRIX world;
-	world = XMMatrixScaling( m_Scale.x, m_Scale.y, m_Scale.z );
-	world *= XMMatrixRotationRollPitchYaw( m_Rotation.x, m_Rotation.y, m_Rotation.z );
-	world *= XMMatrixTranslation( m_Position.x, m_Position.y, m_Position.z );
+	DirectX::XMMATRIX world;
+	world = DirectX::XMMatrixScaling( m_Scale.x, m_Scale.y, m_Scale.z );
+	world *= DirectX::XMMatrixRotationRollPitchYaw( m_Rotation.x, m_Rotation.y, m_Rotation.z );
+	world *= DirectX::XMMatrixTranslation( m_Position.x, m_Position.y, m_Position.z );
 	Renderer::SetWorldMatrix( &world );
 
 	// プリミティブトポロジ設定

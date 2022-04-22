@@ -1,24 +1,38 @@
-
-
 #include "main.h"
 #include "manager.h"
+#include <string>
 
-
-const char* CLASS_NAME = "DX11AppClass";
-const char* WINDOW_NAME = "フラクタルツリー（F1,F2でシード変更）";
-
-
-LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-
-
+// グローバル変数
+std::string g_ClassName = "DX11AppClass";
+std::string g_WindewName = "フラクタルツリー（1,2でシード変更）";
 HWND g_Window;
 
-HWND GetWindow()
+// ウインドウプロシージャ
+LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	return g_Window;
+	switch (uMsg)
+	{
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		break;
+
+	case WM_KEYDOWN:
+		switch (wParam)
+		{
+		case VK_ESCAPE:
+			DestroyWindow(hWnd);
+			break;
+		}
+		break;
+
+	default:
+		break;
+	}
+
+	return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
 
-
+// main関数
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	WNDCLASSEX wcex =
@@ -33,7 +47,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 		LoadCursor(NULL, IDC_ARROW),
 		(HBRUSH)(COLOR_WINDOW + 1),
 		NULL,
-		CLASS_NAME,
+		g_ClassName.c_str(),
 		NULL
 	};
 
@@ -42,8 +56,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	// ウィンドウの作成
 	g_Window = CreateWindowEx(0,
-		CLASS_NAME,
-		WINDOW_NAME,
+		g_ClassName.c_str(),
+		g_WindewName.c_str(),
 		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,
@@ -56,23 +70,20 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 
 	// 初期化処理(ウィンドウを作成してから行う)
-	CManager::Init();
+	Manager::Init();
 
 
 	// ウインドウの表示(初期化処理の後に行う)
 	ShowWindow(g_Window, nCmdShow);
 	UpdateWindow(g_Window);
-
-
-
+	   
 	//フレームカウント初期化
 	DWORD dwExecLastTime;
 	DWORD dwCurrentTime;
 	timeBeginPeriod(1);
 	dwExecLastTime = timeGetTime();
 	dwCurrentTime = 0;
-
-
+	
 	// メッセージループ
 	MSG msg;
 	while(1)
@@ -99,51 +110,27 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 				dwExecLastTime = dwCurrentTime;
 
 				// 更新処理
-				CManager::Update();
+				Manager::Update();
 
 				// 描画処理
-				CManager::Draw();
+				Manager::Draw();
 			}
 		}
 	}
 
-	timeEndPeriod(1);				// 分解能を戻す
+	timeEndPeriod(1); // 分解能を戻す
 
 	// ウィンドウクラスの登録を解除
-	UnregisterClass(CLASS_NAME, wcex.hInstance);
+	UnregisterClass(g_ClassName.c_str(), wcex.hInstance);
 
 	// 終了処理
-	CManager::Uninit();
+	Manager::Uninit();
 
 	return (int)msg.wParam;
 }
 
 
-//=============================================================================
-// ウインドウプロシージャ
-//=============================================================================
-LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+HWND GetWindow()
 {
-
-	switch(uMsg)
-	{
-	case WM_DESTROY:
-		PostQuitMessage(0);
-		break;
-
-	case WM_KEYDOWN:
-		switch(wParam)
-		{
-		case VK_ESCAPE:
-			DestroyWindow(hWnd);
-			break;
-		}
-		break;
-
-	default:
-		break;
-	}
-
-	return DefWindowProc(hWnd, uMsg, wParam, lParam);
+	return g_Window;
 }
-

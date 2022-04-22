@@ -9,9 +9,9 @@
 void Model::LoadObj( const char *FileName, MODEL *Model )
 {
 
-	XMFLOAT3	*positionArray;
-	XMFLOAT3	*normalArray;
-	XMFLOAT2	*texcoordArray;
+	DirectX::XMFLOAT3	*positionArray;
+	DirectX::XMFLOAT3	*normalArray;
+	DirectX::XMFLOAT2	*texcoordArray;
 
 	unsigned short	positionNum = 0;
 	unsigned short	normalNum = 0;
@@ -82,9 +82,9 @@ void Model::LoadObj( const char *FileName, MODEL *Model )
 
 
 	//ƒƒ‚ƒŠŠm•Û
-	positionArray = new XMFLOAT3[ positionNum ];
-	normalArray = new XMFLOAT3[ normalNum ];
-	texcoordArray = new XMFLOAT2[ texcoordNum ];
+	positionArray = new DirectX::XMFLOAT3[ positionNum ];
+	normalArray = new DirectX::XMFLOAT3[ normalNum ];
+	texcoordArray = new DirectX::XMFLOAT2[ texcoordNum ];
 
 
 	Model->VertexArray = new VERTEX_3D[ vertexNum ];
@@ -100,9 +100,9 @@ void Model::LoadObj( const char *FileName, MODEL *Model )
 
 
 	//—v‘f“Çž
-	XMFLOAT3 *position = positionArray;
-	XMFLOAT3 *normal = normalArray;
-	XMFLOAT2 *texcoord = texcoordArray;
+	DirectX::XMFLOAT3 *position = positionArray;
+	DirectX::XMFLOAT3 *normal = normalArray;
+	DirectX::XMFLOAT2 *texcoord = texcoordArray;
 
 	unsigned short vc = 0;
 	unsigned short ic = 0;
@@ -207,7 +207,7 @@ void Model::LoadObj( const char *FileName, MODEL *Model )
 				s = strtok( NULL, "/" );	
 				Model->VertexArray[vc].Normal = normalArray[ atoi( s ) - 1 ];
 
-				Model->VertexArray[vc].Diffuse = XMFLOAT4( 1.0f, 1.0f, 1.0f, 1.0f );
+				Model->VertexArray[vc].Diffuse = DirectX::XMFLOAT4( 1.0f, 1.0f, 1.0f, 1.0f );
 
 				Model->IndexArray[ic] = vc;
 				ic++;

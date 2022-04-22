@@ -1,16 +1,12 @@
 #pragma once
 
-
-
-
-
 // í∏ì_ç\ë¢ëÃ
 struct VERTEX_3D
 {
-    XMFLOAT3 Position;
-    XMFLOAT3 Normal;
-    XMFLOAT4 Diffuse;
-    XMFLOAT2 TexCoord;
+    DirectX::XMFLOAT3 Position;
+    DirectX::XMFLOAT3 Normal;
+    DirectX::XMFLOAT4 Diffuse;
+    DirectX::XMFLOAT2 TexCoord;
 };
 
 
@@ -64,7 +60,7 @@ struct DX11_SUBSET
 
 struct LIGHT
 {
-	XMFLOAT4	Direction;
+	DirectX::XMFLOAT4	Direction;
 	COLOR		Diffuse;
 	COLOR		Ambient;
 };
@@ -78,7 +74,6 @@ class Texture;
 class Renderer
 {
 private:
-
 	static D3D_FEATURE_LEVEL       m_FeatureLevel;
 
 	static ID3D11Device*           m_D3DDevice;
@@ -110,9 +105,9 @@ public:
 
 	static void SetDepthEnable(bool Enable);
 	static void SetWorldViewProjection2D();
-	static void SetWorldMatrix(XMMATRIX * WorldMatrix);
-	static void SetViewMatrix(XMMATRIX * ViewMatrix);
-	static void SetProjectionMatrix(XMMATRIX * ProjectionMatrix);
+	static void SetWorldMatrix(DirectX::XMMATRIX * WorldMatrix);
+	static void SetViewMatrix(DirectX::XMMATRIX * ViewMatrix);
+	static void SetProjectionMatrix(DirectX::XMMATRIX * ProjectionMatrix);
 	static void SetMaterial(MATERIAL Material);
 	static void SetLight(LIGHT Light);
 	static void SetVertexBuffers(ID3D11Buffer* VertexBuffer);
