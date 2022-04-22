@@ -8,9 +8,9 @@ private:
 	int		m_Seed;
 
 public:
-	void Init();
-	void Uninit();
-	void Update();
-	void Draw();
+	void Init()override;
+	void Uninit()override;
+	void Update()override;
+	void Draw()override;
 	void DrawChild(DirectX::XMMATRIX Parent, float Scale);
 };

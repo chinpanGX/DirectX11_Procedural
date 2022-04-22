@@ -1,16 +1,13 @@
 #pragma once
 
-class Camera : public GameObject
+class Camera final : public GameObject
 {
 private:
-
 	RECT m_Viewport;
 
 public:
-	void Init();
-	void Uninit();
-	void Update();
-	void Draw();
-
-
+	void Init()override;
+	void Uninit()override;
+	void Update()override;
+	void Draw()override;
 };

@@ -56,6 +56,9 @@
     <ClCompile Include="model.cpp">
       <Filter>ソース ファイル\resource</Filter>
     </ClCompile>
+    <ClCompile Include="Leaf.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -97,6 +100,7 @@
     <ClInclude Include="Random.h">
       <Filter>ソース ファイル\system</Filter>
     </ClInclude>
+    <ClInclude Include="Leaf.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="vertexShader.hlsl">

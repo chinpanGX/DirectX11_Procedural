@@ -1,18 +1,15 @@
 #pragma once
 
 
-class Field : public GameObject
+class Field final : public GameObject
 {
 private:
-
 	ID3D11Buffer*	m_VertexBuffer = NULL;
 	Texture*		m_Texture = NULL;
 
 public:
-	void Init();
-	void Uninit();
-	void Update();
-	void Draw();
-
-
+	void Init()override;
+	void Uninit()override;
+	void Update()override;
+	void Draw()override;
 };

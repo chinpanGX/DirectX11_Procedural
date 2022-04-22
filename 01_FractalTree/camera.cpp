@@ -40,12 +40,9 @@ void Camera::Update()
 
 void Camera::Draw()
 {
-
 	DirectX::XMMATRIX	m_ViewMatrix;
 	DirectX::XMMATRIX	m_InvViewMatrix;
 	DirectX::XMMATRIX	m_ProjectionMatrix;
-
-
 
 	// ビューポート設定
 	D3D11_VIEWPORT dxViewport;
@@ -55,10 +52,7 @@ void Camera::Draw()
 	dxViewport.MaxDepth = 1.0f;
 	dxViewport.TopLeftX = (float)m_Viewport.left;
 	dxViewport.TopLeftY = (float)m_Viewport.top;
-
 	Renderer::GetDeviceContext()->RSSetViewports(1, &dxViewport);
-
-
 
 	// ビューマトリクス設定
 	m_InvViewMatrix = DirectX::XMMatrixRotationRollPitchYaw(m_Rotation.x, m_Rotation.y, m_Rotation.z);
@@ -66,17 +60,10 @@ void Camera::Draw()
 
 	DirectX::XMVECTOR det;
 	m_ViewMatrix = DirectX::XMMatrixInverse(&det, m_InvViewMatrix);
-
 	Renderer::SetViewMatrix(&m_ViewMatrix);
-
-
 
 	// プロジェクションマトリクス設定
 	m_ProjectionMatrix = DirectX::XMMatrixPerspectiveFovLH(1.0f, dxViewport.Width / dxViewport.Height, 1.0f, 1000.0f);
-
 	Renderer::SetProjectionMatrix(&m_ProjectionMatrix);
-
-
-
 }
 
