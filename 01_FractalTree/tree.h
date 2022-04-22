@@ -1,12 +1,10 @@
 #pragma once
 
 
-class CTree : public CGameObject
+class Tree : public GameObject
 {
 private:
-
-	CModel* m_Model;
-
+	Model* m_Model;
 	int		m_Seed;
 
 public:
@@ -15,5 +13,4 @@ public:
 	void Update();
 	void Draw();
 	void DrawChild(XMMATRIX Parent, float Scale);
-
 };

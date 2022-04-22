@@ -9,7 +9,7 @@
 
 
 
-void CPolygon::Init()
+void Polygon::Init()
 {
 	VERTEX_3D vertex[4];
 
@@ -45,16 +45,16 @@ void CPolygon::Init()
 	ZeroMemory( &sd, sizeof(sd) );
 	sd.pSysMem = vertex;
 
-	CRenderer::GetDevice()->CreateBuffer( &bd, &sd, &m_VertexBuffer );
+	Renderer::GetDevice()->CreateBuffer( &bd, &sd, &m_VertexBuffer );
 
 
-	m_Texture = new CTexture();
+	m_Texture = new Texture();
 	m_Texture->Load("data/TEXTURE/number.tga");
 		
 }
 
 
-void CPolygon::Uninit()
+void Polygon::Uninit()
 {
 
 	m_VertexBuffer->Release();
@@ -66,31 +66,31 @@ void CPolygon::Uninit()
 }
 
 
-void CPolygon::Update()
+void Polygon::Update()
 {
 
 
 }
 
 
-void CPolygon::Draw()
+void Polygon::Draw()
 {
 
 	// 頂点バッファ設定
 	UINT stride = sizeof( VERTEX_3D );
 	UINT offset = 0;
-	CRenderer::GetDeviceContext()->IASetVertexBuffers( 0, 1, &m_VertexBuffer, &stride, &offset );
+	Renderer::GetDeviceContext()->IASetVertexBuffers( 0, 1, &m_VertexBuffer, &stride, &offset );
 
 	// テクスチャ設定
-	CRenderer::SetTexture( m_Texture );
+	Renderer::SetTexture( m_Texture );
 
 	// マトリクス設定
-	CRenderer::SetWorldViewProjection2D();
+	Renderer::SetWorldViewProjection2D();
 
 	// プリミティブトポロジ設定
-	CRenderer::GetDeviceContext()->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP );
+	Renderer::GetDeviceContext()->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP );
 
 	// ポリゴン描画
-	CRenderer::GetDeviceContext()->Draw( 4, 0 );
+	Renderer::GetDeviceContext()->Draw( 4, 0 );
 
 }

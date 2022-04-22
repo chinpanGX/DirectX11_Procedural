@@ -14,7 +14,7 @@ CScene*	g_Scene;
 void CManager::Init()
 {
 
-	CRenderer::Init();
+	Renderer::Init();
 	CInput::Init();
 
 	g_Scene = new CScene();
@@ -29,7 +29,7 @@ void CManager::Uninit()
 	delete g_Scene;
 
 	CInput::Uninit();
-	CRenderer::Uninit();
+	Renderer::Uninit();
 
 }
 
@@ -45,10 +45,10 @@ void CManager::Update()
 void CManager::Draw()
 {
 
-	CRenderer::Begin();
+	Renderer::Begin();
 
 	g_Scene->Draw();
 
-	CRenderer::End();
+	Renderer::End();
 
 }

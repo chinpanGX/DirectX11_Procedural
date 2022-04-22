@@ -1,12 +1,12 @@
 #pragma once
 
 
-class CField : public CGameObject
+class Field : public GameObject
 {
 private:
 
 	ID3D11Buffer*	m_VertexBuffer = NULL;
-	CTexture*		m_Texture = NULL;
+	Texture*		m_Texture = NULL;
 
 public:
 	void Init();

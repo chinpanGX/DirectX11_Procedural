@@ -15,7 +15,7 @@
 class CScene
 {
 protected:
-	std::list<CGameObject*>	m_GameObject;
+	std::list<GameObject*>	m_GameObject;
 
 public:
 	CScene(){}
@@ -24,15 +24,15 @@ public:
 
 	virtual void Init()
 	{
-		AddGameObject<CCamera>();
-		AddGameObject<CField>();
-		AddGameObject<CTree>();
-		//AddGameObject<CPolygon>();
+		AddGameObject<Camera>();
+		AddGameObject<Field>();
+		AddGameObject<Tree>();
+		//AddGameObject<Polygon>();
 	}
 
 	virtual void Uninit()
 	{
-		for (CGameObject* object : m_GameObject)
+		for (GameObject* object : m_GameObject)
 		{
 			object->Uninit();
 			delete object;
@@ -44,14 +44,14 @@ public:
 
 	virtual void Update()
 	{
-		for( CGameObject* object : m_GameObject )
+		for( GameObject* object : m_GameObject )
 			object->Update();
 	}
 
 
 	virtual void Draw()
 	{
-		for (CGameObject* object : m_GameObject)
+		for (GameObject* object : m_GameObject)
 			object->Draw();
 	}
 
@@ -61,11 +61,9 @@ public:
 	{
 		T* gameObject = new T();
 		gameObject->Init();
-		m_GameObject.push_back( gameObject );
+		m_GameObject.push_back(gameObject);
 
 		return gameObject;
 	}
-
-
 
 };

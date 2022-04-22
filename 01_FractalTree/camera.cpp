@@ -8,7 +8,7 @@
 
 
 
-void CCamera::Init()
+void Camera::Init()
 {
 
 	m_Position = XMFLOAT3( 0.0f, 9.0f, -10.0f );
@@ -23,14 +23,14 @@ void CCamera::Init()
 }
 
 
-void CCamera::Uninit()
+void Camera::Uninit()
 {
 
 
 }
 
 
-void CCamera::Update()
+void Camera::Update()
 {
 
 
@@ -38,7 +38,7 @@ void CCamera::Update()
 
 
 
-void CCamera::Draw()
+void Camera::Draw()
 {
 
 	XMMATRIX	m_ViewMatrix;
@@ -56,7 +56,7 @@ void CCamera::Draw()
 	dxViewport.TopLeftX = (float)m_Viewport.left;
 	dxViewport.TopLeftY = (float)m_Viewport.top;
 
-	CRenderer::GetDeviceContext()->RSSetViewports(1, &dxViewport);
+	Renderer::GetDeviceContext()->RSSetViewports(1, &dxViewport);
 
 
 
@@ -67,14 +67,14 @@ void CCamera::Draw()
 	XMVECTOR det;
 	m_ViewMatrix = XMMatrixInverse(&det, m_InvViewMatrix);
 
-	CRenderer::SetViewMatrix(&m_ViewMatrix);
+	Renderer::SetViewMatrix(&m_ViewMatrix);
 
 
 
 	// プロジェクションマトリクス設定
 	m_ProjectionMatrix = XMMatrixPerspectiveFovLH(1.0f, dxViewport.Width / dxViewport.Height, 1.0f, 1000.0f);
 
-	CRenderer::SetProjectionMatrix(&m_ProjectionMatrix);
+	Renderer::SetProjectionMatrix(&m_ProjectionMatrix);
 
 
 

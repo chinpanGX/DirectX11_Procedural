@@ -9,7 +9,7 @@
 
 
 
-void CField::Init()
+void Field::Init()
 {
 	VERTEX_3D vertex[4];
 
@@ -45,10 +45,10 @@ void CField::Init()
 	ZeroMemory( &sd, sizeof(sd) );
 	sd.pSysMem = vertex;
 
-	CRenderer::GetDevice()->CreateBuffer( &bd, &sd, &m_VertexBuffer );
+	Renderer::GetDevice()->CreateBuffer( &bd, &sd, &m_VertexBuffer );
 
 
-	m_Texture = new CTexture();
+	m_Texture = new Texture();
 	m_Texture->Load("data/TEXTURE/field004.tga");
 		
 
@@ -60,7 +60,7 @@ void CField::Init()
 }
 
 
-void CField::Uninit()
+void Field::Uninit()
 {
 
 	m_VertexBuffer->Release();
@@ -72,35 +72,35 @@ void CField::Uninit()
 }
 
 
-void CField::Update()
+void Field::Update()
 {
 
 
 }
 
 
-void CField::Draw()
+void Field::Draw()
 {
 
 	// 頂点バッファ設定
 	UINT stride = sizeof( VERTEX_3D );
 	UINT offset = 0;
-	CRenderer::GetDeviceContext()->IASetVertexBuffers( 0, 1, &m_VertexBuffer, &stride, &offset );
+	Renderer::GetDeviceContext()->IASetVertexBuffers( 0, 1, &m_VertexBuffer, &stride, &offset );
 
 	// テクスチャ設定
-	CRenderer::SetTexture( m_Texture );
+	Renderer::SetTexture( m_Texture );
 
 	// マトリクス設定
 	XMMATRIX world;
 	world = XMMatrixScaling( m_Scale.x, m_Scale.y, m_Scale.z );
 	world *= XMMatrixRotationRollPitchYaw( m_Rotation.x, m_Rotation.y, m_Rotation.z );
 	world *= XMMatrixTranslation( m_Position.x, m_Position.y, m_Position.z );
-	CRenderer::SetWorldMatrix( &world );
+	Renderer::SetWorldMatrix( &world );
 
 	// プリミティブトポロジ設定
-	CRenderer::GetDeviceContext()->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP );
+	Renderer::GetDeviceContext()->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP );
 
 	// ポリゴン描画
-	CRenderer::GetDeviceContext()->Draw( 4, 0 );
+	Renderer::GetDeviceContext()->Draw( 4, 0 );
 
 }

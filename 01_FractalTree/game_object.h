@@ -5,8 +5,7 @@
 #include "renderer.h"
 
 
-
-class CGameObject
+class GameObject
 {
 
 protected:
@@ -29,9 +28,9 @@ public:
 
 public:
 
-	CGameObject(){}
+	GameObject(){}
 
-	virtual ~CGameObject()
+	virtual ~GameObject()
 	{
 	}
 

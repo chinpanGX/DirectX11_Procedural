@@ -5,31 +5,31 @@
 #include <io.h>
 
 
-D3D_FEATURE_LEVEL       CRenderer::m_FeatureLevel = D3D_FEATURE_LEVEL_11_0;
+D3D_FEATURE_LEVEL       Renderer::m_FeatureLevel = D3D_FEATURE_LEVEL_11_0;
 
-ID3D11Device*           CRenderer::m_D3DDevice = NULL;
-ID3D11DeviceContext*    CRenderer::m_ImmediateContext = NULL;
-IDXGISwapChain*         CRenderer::m_SwapChain = NULL;
-ID3D11RenderTargetView* CRenderer::m_RenderTargetView = NULL;
-ID3D11DepthStencilView* CRenderer::m_DepthStencilView = NULL;
-
-
-
-ID3D11VertexShader*     CRenderer::m_VertexShader = NULL;
-ID3D11PixelShader*      CRenderer::m_PixelShader = NULL;
-ID3D11InputLayout*      CRenderer::m_VertexLayout = NULL;
-ID3D11Buffer*			CRenderer::m_WorldBuffer = NULL;
-ID3D11Buffer*			CRenderer::m_ViewBuffer = NULL;
-ID3D11Buffer*			CRenderer::m_ProjectionBuffer = NULL;
-ID3D11Buffer*			CRenderer::m_MaterialBuffer = NULL;
-ID3D11Buffer*			CRenderer::m_LightBuffer = NULL;
-
-ID3D11DepthStencilState* CRenderer::m_DepthStateEnable;
-ID3D11DepthStencilState* CRenderer::m_DepthStateDisable;
+ID3D11Device*           Renderer::m_D3DDevice = NULL;
+ID3D11DeviceContext*    Renderer::m_ImmediateContext = NULL;
+IDXGISwapChain*         Renderer::m_SwapChain = NULL;
+ID3D11RenderTargetView* Renderer::m_RenderTargetView = NULL;
+ID3D11DepthStencilView* Renderer::m_DepthStencilView = NULL;
 
 
 
-void CRenderer::Init()
+ID3D11VertexShader*     Renderer::m_VertexShader = NULL;
+ID3D11PixelShader*      Renderer::m_PixelShader = NULL;
+ID3D11InputLayout*      Renderer::m_VertexLayout = NULL;
+ID3D11Buffer*			Renderer::m_WorldBuffer = NULL;
+ID3D11Buffer*			Renderer::m_ViewBuffer = NULL;
+ID3D11Buffer*			Renderer::m_ProjectionBuffer = NULL;
+ID3D11Buffer*			Renderer::m_MaterialBuffer = NULL;
+ID3D11Buffer*			Renderer::m_LightBuffer = NULL;
+
+ID3D11DepthStencilState* Renderer::m_DepthStateEnable;
+ID3D11DepthStencilState* Renderer::m_DepthStateDisable;
+
+
+
+void Renderer::Init()
 {
 	HRESULT hr = S_OK;
 
@@ -303,7 +303,7 @@ void CRenderer::Init()
 
 
 
-void CRenderer::Uninit()
+void Renderer::Uninit()
 {
 	// オブジェクト解放
 	if ( m_WorldBuffer )		m_WorldBuffer->Release();
@@ -325,7 +325,7 @@ void CRenderer::Uninit()
 
 
 
-void CRenderer::Begin()
+void Renderer::Begin()
 {
 	// バックバッファクリア
 	float ClearColor[4] = { 0.0f, 0.5f, 0.5f, 1.0f };
@@ -336,7 +336,7 @@ void CRenderer::Begin()
 
 
 
-void CRenderer::End()
+void Renderer::End()
 {
 	m_SwapChain->Present( 1, 0 );
 }
@@ -344,7 +344,7 @@ void CRenderer::End()
 
 
 
-void CRenderer::SetDepthEnable( bool Enable )
+void Renderer::SetDepthEnable( bool Enable )
 {
 	if( Enable )
 		m_ImmediateContext->OMSetDepthStencilState( m_DepthStateEnable, NULL );
@@ -353,7 +353,7 @@ void CRenderer::SetDepthEnable( bool Enable )
 
 }
 
-void CRenderer::SetWorldViewProjection2D()
+void Renderer::SetWorldViewProjection2D()
 {
 	XMMATRIX world;
 	world = XMMatrixIdentity();
@@ -370,7 +370,7 @@ void CRenderer::SetWorldViewProjection2D()
 }
 
 
-void CRenderer::SetWorldMatrix( XMMATRIX *WorldMatrix )
+void Renderer::SetWorldMatrix( XMMATRIX *WorldMatrix )
 {
 	XMMATRIX world;
 	world = *WorldMatrix;
@@ -378,14 +378,14 @@ void CRenderer::SetWorldMatrix( XMMATRIX *WorldMatrix )
 
 }
 
-void CRenderer::SetViewMatrix( XMMATRIX *ViewMatrix )
+void Renderer::SetViewMatrix( XMMATRIX *ViewMatrix )
 {
 	XMMATRIX view;
 	view = *ViewMatrix;
 	m_ImmediateContext->UpdateSubresource(m_ViewBuffer, 0, NULL, &XMMatrixTranspose(view), 0, 0);
 }
 
-void CRenderer::SetProjectionMatrix( XMMATRIX *ProjectionMatrix )
+void Renderer::SetProjectionMatrix( XMMATRIX *ProjectionMatrix )
 {
 	XMMATRIX projection;
 	projection = *ProjectionMatrix;
@@ -394,14 +394,14 @@ void CRenderer::SetProjectionMatrix( XMMATRIX *ProjectionMatrix )
 
 
 
-void CRenderer::SetMaterial( MATERIAL Material )
+void Renderer::SetMaterial( MATERIAL Material )
 {
 
 	m_ImmediateContext->UpdateSubresource( m_MaterialBuffer, 0, NULL, &Material, 0, 0 );
 
 }
 
-void CRenderer::SetLight(LIGHT Light)
+void Renderer::SetLight(LIGHT Light)
 {
 
 	m_ImmediateContext->UpdateSubresource(m_LightBuffer, 0, NULL, &Light, 0, 0);
@@ -409,7 +409,7 @@ void CRenderer::SetLight(LIGHT Light)
 }
 
 
-void CRenderer::SetVertexBuffers( ID3D11Buffer* VertexBuffer )
+void Renderer::SetVertexBuffers( ID3D11Buffer* VertexBuffer )
 {
 
 	UINT stride = sizeof( VERTEX_3D );
@@ -421,7 +421,7 @@ void CRenderer::SetVertexBuffers( ID3D11Buffer* VertexBuffer )
 
 
 
-void CRenderer::SetIndexBuffer( ID3D11Buffer* IndexBuffer )
+void Renderer::SetIndexBuffer( ID3D11Buffer* IndexBuffer )
 {
 
 	m_ImmediateContext->IASetIndexBuffer( IndexBuffer, DXGI_FORMAT_R16_UINT, 0 );
@@ -429,7 +429,7 @@ void CRenderer::SetIndexBuffer( ID3D11Buffer* IndexBuffer )
 }
 
 
-void CRenderer::SetTexture( CTexture* Texture )
+void Renderer::SetTexture(Texture* Texture )
 {
 
 	ID3D11ShaderResourceView* srv[1] = { Texture->GetShaderResourceView() };
@@ -438,7 +438,7 @@ void CRenderer::SetTexture( CTexture* Texture )
 }
 
 
-void CRenderer::DrawIndexed( unsigned int IndexCount, unsigned int StartIndexLocation, int BaseVertexLocation )
+void Renderer::DrawIndexed( unsigned int IndexCount, unsigned int StartIndexLocation, int BaseVertexLocation )
 {
 
 	m_ImmediateContext->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST );

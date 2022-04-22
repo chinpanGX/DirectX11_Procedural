@@ -1,10 +1,8 @@
-
 #include "main.h"
 #include "renderer.h"
 #include "texture.h"
 
-
-void CTexture::Load(const char *FileName)
+void Texture::Load(std::string FileName)
 {
 
 	unsigned char	header[18];
@@ -17,7 +15,7 @@ void CTexture::Load(const char *FileName)
 
 	// ƒwƒbƒ_“Ç‚Ýž‚Ý
 	FILE* file;
-	file = fopen(FileName, "rb");
+	file = fopen(FileName.c_str(), "rb");
 	assert(file);
 
 	fread(header, sizeof(header), 1, file);
@@ -80,7 +78,7 @@ void CTexture::Load(const char *FileName)
 	initData.SysMemPitch = width * 4;
 	initData.SysMemSlicePitch = size;
 
-	auto hr = CRenderer::GetDevice()->CreateTexture2D(&desc, &initData, &m_Texture);
+	auto hr = Renderer::GetDevice()->CreateTexture2D(&desc, &initData, &m_Texture);
 	if (FAILED(hr)) {
 		assert(false);
 	}
@@ -90,7 +88,7 @@ void CTexture::Load(const char *FileName)
 	SRVDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
 	SRVDesc.Texture2D.MipLevels = 1;
 
-	hr = CRenderer::GetDevice()->CreateShaderResourceView(m_Texture, &SRVDesc, &m_ShaderResourceView);
+	hr = Renderer::GetDevice()->CreateShaderResourceView(m_Texture, &SRVDesc, &m_ShaderResourceView);
 	if (FAILED(hr))
 	{
 		assert(false);
@@ -101,7 +99,7 @@ void CTexture::Load(const char *FileName)
 }
 
 
-void CTexture::Unload()
+void Texture::Unload()
 {
 	m_Texture->Release();
 	m_ShaderResourceView->Release();

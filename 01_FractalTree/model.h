@@ -1,7 +1,6 @@
 #pragma once
 
 
-
 // マテリアル構造体
 struct MODEL_MATERIAL
 {
@@ -30,14 +29,11 @@ struct MODEL
 };
 
 
-
-class CModel
+class Model
 {
 private:
-
 	ID3D11Buffer*	m_VertexBuffer = NULL;
 	ID3D11Buffer*	m_IndexBuffer = NULL;
-
 	DX11_SUBSET*	m_SubsetArray = NULL;
 	unsigned short	m_SubsetNum;
 
@@ -46,7 +42,6 @@ private:
 
 public:
 	void Draw();
-
 	void Load( const char *FileName );
 	void Unload();
 

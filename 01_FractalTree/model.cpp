@@ -1,5 +1,3 @@
-
-
 #include "main.h"
 #include "input.h"
 #include "renderer.h"
@@ -7,118 +5,8 @@
 #include "model.h"
 #include "texture.h"
 
-
-
-
-
-void CModel::Draw()
-{
-
-	// 頂点バッファ設定
-	CRenderer::SetVertexBuffers( m_VertexBuffer );
-
-	// インデックスバッファ設定
-	CRenderer::SetIndexBuffer( m_IndexBuffer );
-
-	for( unsigned short i = 0; i < m_SubsetNum; i++ )
-	{
-		// マテリアル設定
-		CRenderer::SetMaterial( m_SubsetArray[i].Material.Material );
-
-		// テクスチャ設定
-		CRenderer::SetTexture( m_SubsetArray[i].Material.Texture );
-
-		// ポリゴン描画
-		CRenderer::DrawIndexed( m_SubsetArray[i].IndexNum, m_SubsetArray[i].StartIndex, 0 );
-	}
-
-}
-
-
-
-
-void CModel::Load( const char *FileName )
-{
-
-	MODEL model;
-	LoadObj( FileName, &model );
-
-
-
-	// 頂点バッファ生成
-	{
-		D3D11_BUFFER_DESC bd;
-		ZeroMemory( &bd, sizeof(bd) );
-		bd.Usage = D3D11_USAGE_DEFAULT;
-		bd.ByteWidth = sizeof( VERTEX_3D ) * model.VertexNum;
-		bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-		bd.CPUAccessFlags = 0;
-
-		D3D11_SUBRESOURCE_DATA sd;
-		ZeroMemory( &sd, sizeof(sd) );
-		sd.pSysMem = model.VertexArray;
-
-		CRenderer::GetDevice()->CreateBuffer( &bd, &sd, &m_VertexBuffer );
-	}
-
-
-	// インデックスバッファ生成
-	{
-		D3D11_BUFFER_DESC bd;
-		ZeroMemory( &bd, sizeof(bd) );
-		bd.Usage = D3D11_USAGE_DEFAULT;
-		bd.ByteWidth = sizeof( unsigned short ) * model.IndexNum;
-		bd.BindFlags = D3D11_BIND_INDEX_BUFFER;
-		bd.CPUAccessFlags = 0;
-
-		D3D11_SUBRESOURCE_DATA sd;
-		ZeroMemory( &sd, sizeof(sd) );
-		sd.pSysMem = model.IndexArray;
-
-		CRenderer::GetDevice()->CreateBuffer( &bd, &sd, &m_IndexBuffer );
-	}
-
-	// サブセット設定
-	{
-		m_SubsetArray = new DX11_SUBSET[ model.SubsetNum ];
-		m_SubsetNum = model.SubsetNum;
-
-		for( unsigned short i = 0; i < model.SubsetNum; i++ )
-		{
-			m_SubsetArray[i].StartIndex = model.SubsetArray[i].StartIndex;
-			m_SubsetArray[i].IndexNum = model.SubsetArray[i].IndexNum;
-
-			m_SubsetArray[i].Material.Material = model.SubsetArray[i].Material.Material;
-
-			m_SubsetArray[i].Material.Texture = new CTexture();
-			m_SubsetArray[i].Material.Texture->Load( model.SubsetArray[i].Material.TextureName );
-
-		}
-	}
-
-	delete[] model.VertexArray;
-	delete[] model.IndexArray;
-	delete[] model.SubsetArray;
-
-}
-
-
-void CModel::Unload()
-{
-	m_VertexBuffer->Release();
-	m_IndexBuffer->Release();
-
-
-	delete[] m_SubsetArray;
-
-}
-
-
-
-
-
 //モデル読込////////////////////////////////////////////
-void CModel::LoadObj( const char *FileName, MODEL *Model )
+void Model::LoadObj( const char *FileName, MODEL *Model )
 {
 
 	XMFLOAT3	*positionArray;
@@ -345,21 +233,14 @@ void CModel::LoadObj( const char *FileName, MODEL *Model )
 	if( sc != 0 )
 		Model->SubsetArray[ sc - 1 ].IndexNum = ic - Model->SubsetArray[ sc - 1 ].StartIndex;
 
-
-
-
-
 	delete[] positionArray;
 	delete[] normalArray;
 	delete[] texcoordArray;
 	delete[] materialArray;
 }
 
-
-
-
 //マテリアル読み込み///////////////////////////////////////////////////////////////////
-void CModel::LoadMaterial( const char *FileName, MODEL_MATERIAL **MaterialArray, unsigned short *MaterialNum )
+void Model::LoadMaterial( const char *FileName, MODEL_MATERIAL **MaterialArray, unsigned short *MaterialNum )
 {
 	char str[256];
 
@@ -466,5 +347,97 @@ void CModel::LoadMaterial( const char *FileName, MODEL_MATERIAL **MaterialArray,
 	*MaterialNum = materialNum;
 }
 
+void Model::Load(const char *FileName)
+{
 
+	MODEL model;
+	LoadObj(FileName, &model);
+
+
+
+	// 頂点バッファ生成
+	{
+		D3D11_BUFFER_DESC bd;
+		ZeroMemory(&bd, sizeof(bd));
+		bd.Usage = D3D11_USAGE_DEFAULT;
+		bd.ByteWidth = sizeof(VERTEX_3D) * model.VertexNum;
+		bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+		bd.CPUAccessFlags = 0;
+
+		D3D11_SUBRESOURCE_DATA sd;
+		ZeroMemory(&sd, sizeof(sd));
+		sd.pSysMem = model.VertexArray;
+
+		Renderer::GetDevice()->CreateBuffer(&bd, &sd, &m_VertexBuffer);
+	}
+
+
+	// インデックスバッファ生成
+	{
+		D3D11_BUFFER_DESC bd;
+		ZeroMemory(&bd, sizeof(bd));
+		bd.Usage = D3D11_USAGE_DEFAULT;
+		bd.ByteWidth = sizeof(unsigned short) * model.IndexNum;
+		bd.BindFlags = D3D11_BIND_INDEX_BUFFER;
+		bd.CPUAccessFlags = 0;
+
+		D3D11_SUBRESOURCE_DATA sd;
+		ZeroMemory(&sd, sizeof(sd));
+		sd.pSysMem = model.IndexArray;
+
+		Renderer::GetDevice()->CreateBuffer(&bd, &sd, &m_IndexBuffer);
+	}
+
+	// サブセット設定
+	{
+		m_SubsetArray = new DX11_SUBSET[model.SubsetNum];
+		m_SubsetNum = model.SubsetNum;
+
+		for (unsigned short i = 0; i < model.SubsetNum; i++)
+		{
+			m_SubsetArray[i].StartIndex = model.SubsetArray[i].StartIndex;
+			m_SubsetArray[i].IndexNum = model.SubsetArray[i].IndexNum;
+
+			m_SubsetArray[i].Material.Material = model.SubsetArray[i].Material.Material;
+
+			m_SubsetArray[i].Material.Texture = new Texture();
+			m_SubsetArray[i].Material.Texture->Load(model.SubsetArray[i].Material.TextureName);
+
+		}
+	}
+
+	delete[] model.VertexArray;
+	delete[] model.IndexArray;
+	delete[] model.SubsetArray;
+
+}
+
+void Model::Unload()
+{
+	m_VertexBuffer->Release();
+	m_IndexBuffer->Release();
+	delete[] m_SubsetArray;
+}
+
+void Model::Draw()
+{
+
+	// 頂点バッファ設定
+	Renderer::SetVertexBuffers(m_VertexBuffer);
+
+	// インデックスバッファ設定
+	Renderer::SetIndexBuffer(m_IndexBuffer);
+
+	for (unsigned short i = 0; i < m_SubsetNum; i++)
+	{
+		// マテリアル設定
+		Renderer::SetMaterial(m_SubsetArray[i].Material.Material);
+
+		// テクスチャ設定
+		Renderer::SetTexture(m_SubsetArray[i].Material.Texture);
+
+		// ポリゴン描画
+		Renderer::DrawIndexed(m_SubsetArray[i].IndexNum, m_SubsetArray[i].StartIndex, 0);
+	}
+}
 

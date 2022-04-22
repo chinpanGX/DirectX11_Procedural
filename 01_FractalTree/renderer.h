@@ -50,7 +50,7 @@ struct MATERIAL
 struct DX11_MODEL_MATERIAL
 {
 	MATERIAL		Material;
-	class CTexture*	Texture;
+	class Texture*	Texture;
 };
 
 
@@ -70,12 +70,12 @@ struct LIGHT
 };
 
 
-class CVertexBuffer;
-class CIndexBuffer;
-class CTexture;
+class VertexBuffer;
+class IndexBuffer;
+class Texture;
 
 
-class CRenderer
+class Renderer
 {
 private:
 
@@ -115,13 +115,17 @@ public:
 	static void SetProjectionMatrix(XMMATRIX * ProjectionMatrix);
 	static void SetMaterial(MATERIAL Material);
 	static void SetLight(LIGHT Light);
-	static void SetVertexBuffers( ID3D11Buffer* VertexBuffer );
-	static void SetIndexBuffer( ID3D11Buffer* IndexBuffer );
-	static void SetTexture( CTexture* Texture );
-	static void DrawIndexed( unsigned int IndexCount, unsigned int StartIndexLocation, int BaseVertexLocation );
+	static void SetVertexBuffers(ID3D11Buffer* VertexBuffer);
+	static void SetIndexBuffer(ID3D11Buffer* IndexBuffer);
+	static void SetTexture(Texture* Texture);
+	static void DrawIndexed(unsigned int IndexCount, unsigned int StartIndexLocation, int BaseVertexLocation);
 
-	static ID3D11Device* GetDevice( void ){ return m_D3DDevice; }
-	static ID3D11DeviceContext* GetDeviceContext( void ){ return m_ImmediateContext; }
-
-
+	static ID3D11Device* GetDevice() 
+	{
+		return m_D3DDevice; 
+	}
+	static ID3D11DeviceContext* GetDeviceContext()
+	{ 
+		return m_ImmediateContext; 
+	}
 };

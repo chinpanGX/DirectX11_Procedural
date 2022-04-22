@@ -1,7 +1,6 @@
 #pragma once
 
-
-class CCamera : public CGameObject
+class Camera : public GameObject
 {
 private:
 
