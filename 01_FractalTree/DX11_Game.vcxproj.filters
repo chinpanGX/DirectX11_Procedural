@@ -57,7 +57,7 @@
       <Filter>ソース ファイル\resource</Filter>
     </ClCompile>
     <ClCompile Include="Leaf.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\game_object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -100,7 +100,9 @@
     <ClInclude Include="Random.h">
       <Filter>ソース ファイル\system</Filter>
     </ClInclude>
-    <ClInclude Include="Leaf.h" />
+    <ClInclude Include="Leaf.h">
+      <Filter>ソース ファイル\game_object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="vertexShader.hlsl">

@@ -4,8 +4,13 @@
 #include "game_object.h"
 #include "model.h"
 #include "texture.h"
+#include "scene.h"
+#include "manager.h"
+#include "Leaf.h"
 #include "tree.h"
 #include "Random.h"
+
+static int Branch = 0;
 
 void Tree::Init()
 {
@@ -18,6 +23,11 @@ void Tree::Init()
 	m_Model->Load("data/MODEL/branch.obj");
 
 	m_Seed = 0;
+
+	for (int i = 0; i < 5; i++)
+	{
+		m_LeafList.emplace_back(Manager::GetScene()->AddGameObject<Leaf>());
+	}
 }
 
 
@@ -34,9 +44,21 @@ void Tree::Update()
 
 
 	if (Input::GetKeyTrigger('1'))
+	{
 		m_Seed++;
+		for (int i = 0; i < m_LeafList.size(); i++)
+		{
+			m_LeafList[i]->SetTransform();
+		}
+	}
 	if (Input::GetKeyTrigger('2'))
+	{
 		m_Seed--;
+		for (int i = 0; i < m_LeafList.size(); i++)
+		{
+			m_LeafList[i]->SetTransform();
+		}
+	}
 
 }
 
@@ -56,12 +78,13 @@ void Tree::Draw()
 
 	// 枝を描画する
 	DrawChild(world, 1.0f);
+
 }
 
 
 
 //再帰的に枝描画/////////////////////////////////////////////////
-void Tree::DrawChild(DirectX::XMMATRIX Parent, float Scale)
+void Tree::DrawChild(const DirectX::XMMATRIX& Parent, float Scale)
 {
 	// 大きさが0.5f以下になったら、再帰処理をやめる
 	if (Scale < 0.5f)
@@ -69,7 +92,8 @@ void Tree::DrawChild(DirectX::XMMATRIX Parent, float Scale)
 		return;
 	}
 
-	// 分割する分ループする
+	DirectX::XMMATRIX world;
+
 	for (int i = 0; i < 3; i++)
 	{
 		// 回転の乱数
@@ -81,7 +105,6 @@ void Tree::DrawChild(DirectX::XMMATRIX Parent, float Scale)
 		//float offset = (float)rand() / RAND_MAX * 1.0f - 0.5f;
 		float offset = (float)Random::Rand_R(1, 5) * 0.05f;
 
-		DirectX::XMMATRIX world;
 		world = DirectX::XMMatrixScaling(Scale, Scale + offset, Scale);
 		world *= DirectX::XMMatrixRotationRollPitchYaw(x, 0.0f, z);
 		world *= DirectX::XMMatrixTranslation(0.0f, 2.0f, 0.0f); // Yが2.0fなのは、先端から枝を生やすため
@@ -91,8 +114,10 @@ void Tree::DrawChild(DirectX::XMMATRIX Parent, float Scale)
 		m_Model->Draw();
 
 		DrawChild(world, Scale * 0.9f);
+	}
 
+	for (int i = 0; i < m_LeafList.size(); i++)
+	{
+		m_LeafList[i]->Draw(world);
 	}
 }
-
-

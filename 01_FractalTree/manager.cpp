@@ -1,8 +1,8 @@
 #include "main.h"
+#include "scene.h"
 #include "manager.h"
 #include "input.h"
 #include "renderer.h"
-#include "scene.h"
 #include "field.h"
 #include "polygon.h"
 #include "model.h"
@@ -49,4 +49,9 @@ void Manager::Draw()
 
 	Renderer::End();
 
+}
+
+Scene * Manager::GetScene()
+{
+	return g_Scene;
 }

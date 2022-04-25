@@ -1,4 +1,5 @@
 #pragma once
+#include "scene.h"
 
 class Manager
 {
@@ -7,4 +8,5 @@ public:
 	static void Uninit();
 	static void Update();
 	static void Draw();
+	static Scene* GetScene();
 };
