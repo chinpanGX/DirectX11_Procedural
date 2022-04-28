@@ -17,8 +17,21 @@ void main( in  float4 inPosition		: SV_POSITION,
 
 			out float4 outDiffuse		: SV_Target )
 {
-
-    outDiffuse.rgb = 1.0;        
+    // ストライプ模様
+    // fmod　= x/y の余りを返す
+    // floor = テスクチャ座標を整数で返す
+    //outDiffuse.rgb = fmod(floor(inTexCoord.y * 2.0), 2);
+    
+    // チェック柄
+    //outDiffuse.rgb = fmod(floor(inTexCoord.x * 2.0) + floor(inTexCoord.y * 2.0), 2);
+    
+    // 波線
+    //outDiffuse.rgb = fmod(floor(inTexCoord.y * 2.0 + sin(inTexCoord.x)), 2);
+    
+    // ナニコレ？
+    //outDiffuse.rgb = fmod(floor(inTexCoord.y * 2.0) + sin(inTexCoord.x), 2);
+    
+    outDiffuse.rgb = voronoi2(inTexCoord);
+    
     outDiffuse.a = 1.0;
-
 }
