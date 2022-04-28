@@ -31,6 +31,7 @@ void main( in  float4 inPosition		: SV_POSITION,
     // ナニコレ？
     //outDiffuse.rgb = fmod(floor(inTexCoord.y * 2.0) + sin(inTexCoord.x), 2);
     
+    // ボロノイ図
     outDiffuse.rgb = voronoi2(inTexCoord);
     
     outDiffuse.a = 1.0;

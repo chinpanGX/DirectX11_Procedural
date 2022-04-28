@@ -105,6 +105,7 @@ void Tree::DrawChild(const DirectX::XMMATRIX& Parent, float Scale)
 		//float offset = (float)rand() / RAND_MAX * 1.0f - 0.5f;
 		float offset = (float)Random::Rand_R(1, 5) * 0.05f;
 
+		// 行列計算
 		world = DirectX::XMMatrixScaling(Scale, Scale + offset, Scale);
 		world *= DirectX::XMMatrixRotationRollPitchYaw(x, 0.0f, z);
 		world *= DirectX::XMMatrixTranslation(0.0f, 2.0f, 0.0f); // Yが2.0fなのは、先端から枝を生やすため
@@ -116,6 +117,7 @@ void Tree::DrawChild(const DirectX::XMMATRIX& Parent, float Scale)
 		DrawChild(world, Scale * 0.9f);
 	}
 
+	// 葉っぱの描画
 	for (int i = 0; i < m_LeafList.size(); i++)
 	{
 		m_LeafList[i]->Draw(world);

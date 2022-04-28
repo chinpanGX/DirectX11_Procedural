@@ -28,7 +28,7 @@ void main(  in float4 inPosition		: SV_POSITION,
 
 			out float4 outDiffuse		: SV_Target )
 {
-
+    /*
     outDiffuse.rgb = 1.0;
     
     
@@ -39,7 +39,8 @@ void main(  in float4 inPosition		: SV_POSITION,
     
     float light = 0.5 - dot(inNormal.xyz, lightDir) * 0.5;
     outDiffuse.rgb *= light;
-        
+    */
+    outDiffuse.rgb = voronoi2(inTexCoord * 50);
     
     
 	outDiffuse.a = 1.0;
