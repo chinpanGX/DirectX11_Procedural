@@ -56,3 +56,49 @@ float4 colorvoronoi(in float2 vec)
     color.b = sin(value);
     return color;
 }
+
+// バリューノイズ
+float valueNoise2(in float2 vec)
+{
+    float2 ivec = floor(vec);
+    float2 fvec = frac(vec);
+    
+    float a = random2D(ivec + float2(0.0, 0.0));
+    float b = random2D(ivec + float2(1.0, 0.0));
+    float c = random2D(ivec + float2(0.0, 1.0));
+    float d = random2D(ivec + float2(1.0, 1.0));
+
+    fvec = smoothstep(0.0, 1.0, fvec);
+    return lerp(lerp(a, b, fvec.x), lerp(c, d, fvec.x), fvec.y);
+
+}
+
+// パーリンノイズ
+float perlinNoise2(in float2 vec)
+{
+    float2 ivec = floor(vec);
+    float2 fvec = frac(vec);
+    
+    float a = dot(random2D2(ivec + float2(0.0, 0.0)) * 2.0 - 1.0, fvec - float2(0.0, 0.0));
+    float b = dot(random2D2(ivec + float2(1.0, 0.0)) * 2.0 - 1.0, fvec - float2(1.0, 0.0));
+    float c = dot(random2D2(ivec + float2(0.0, 1.0)) * 2.0 - 1.0, fvec - float2(0.0, 1.0));
+    float d = dot(random2D2(ivec + float2(1.0, 1.0)) * 2.0 - 1.0, fvec - float2(1.0, 1.0));
+
+    fvec = smoothstep(0.0, 1.0, fvec);
+    return lerp(lerp(a, b, fvec.x), lerp(c, d, fvec.x), fvec.y);
+}
+
+float fbm2(in float2 vec, int octave)
+{
+    float value;
+    float amplitude = 1.0;
+    
+    for (int i = 0; i < octave; i++)
+    {
+        value += amplitude * perlinNoise2(vec);
+        vec *= 2;
+        amplitude *= 0.5;
+    }
+    
+    return value;
+}
