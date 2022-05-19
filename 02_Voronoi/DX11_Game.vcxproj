@@ -117,6 +117,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="Cube.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="manager.cpp" />
@@ -125,9 +126,11 @@
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="texture.cpp" />
     <ClCompile Include="polygon.cpp" />
+    <ClCompile Include="Torus.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />
+    <ClInclude Include="Cube.h" />
     <ClInclude Include="game_object.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="main.h" />
@@ -138,6 +141,7 @@
     <ClInclude Include="shader.h" />
     <ClInclude Include="texture.h" />
     <ClInclude Include="polygon.h" />
+    <ClInclude Include="Torus.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="shader2DTexturePS.hlsl">

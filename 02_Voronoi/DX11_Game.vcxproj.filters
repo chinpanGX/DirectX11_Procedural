@@ -53,6 +53,12 @@
     <ClCompile Include="shader.cpp">
       <Filter>ソース ファイル\shader</Filter>
     </ClCompile>
+    <ClCompile Include="Torus.cpp">
+      <Filter>ソース ファイル\game_object</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>ソース ファイル\game_object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -87,6 +93,12 @@
     </ClInclude>
     <ClInclude Include="shader.h">
       <Filter>ソース ファイル\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Torus.h">
+      <Filter>ソース ファイル\game_object</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>ソース ファイル\game_object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

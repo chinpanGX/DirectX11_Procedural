@@ -31,14 +31,14 @@ struct MODEL
 
 
 
-class CModel : public CGameObject
+class CModel
 {
 private:
 
-	ID3D11Buffer*	m_VertexBuffer = NULL;
-	ID3D11Buffer*	m_IndexBuffer = NULL;
+	ID3D11Buffer*	m_VertexBuffer;
+	ID3D11Buffer*	m_IndexBuffer;
 
-	DX11_SUBSET*	m_SubsetArray = NULL;
+	DX11_SUBSET*	m_SubsetArray;
 	unsigned short	m_SubsetNum;
 
 	void LoadObj( const char *FileName, MODEL *Model );
@@ -49,13 +49,7 @@ private:
 
 
 public:
-	void Init();
-	void Uninit();
-	void Update();
-	void Draw();
-	void DrawShadow();
-
+	void Draw();	
 	void Load( const char *FileName );
 	void Unload();
-
 };
