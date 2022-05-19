@@ -118,4 +118,9 @@
       <Filter>ソース ファイル\shader</Filter>
     </FxCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="shaderHeader.hlsli">
+      <Filter>ソース ファイル\shader</Filter>
+    </None>
+  </ItemGroup>
 </Project>

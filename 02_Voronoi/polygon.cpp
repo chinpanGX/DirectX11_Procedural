@@ -53,6 +53,9 @@ void CPolygon::Init()
 	m_Shader->Init( "shader2DTextureVS.cso", "shader2DTexturePS.cso" );
 	
 
+	m_Parameter.x = 0.0f;
+	m_Parameter.y = 0.0f;
+	m_Parameter.z = 0.0f;
 }
 
 
@@ -92,7 +95,11 @@ void CPolygon::Draw()
 	DirectX::XMStoreFloat4x4(&projection, XMMatrixOrthographicOffCenterLH(0.0f, SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f, 0.0f, 1.0f));
 	m_Shader->SetProjectionMatrix(&projection);
 
+	m_Parameter.x += 0.02f;
+	m_Parameter.y += 0.02f;
+	
 
+	m_Shader->SetPrameter(m_Parameter);
 	m_Shader->Set();
 
 

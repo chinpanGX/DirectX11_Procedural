@@ -1,11 +1,9 @@
-
+#include "shaderHeader.hlsli"
 #include "shaderNoise.hlsl"
 
 
 Texture2D		g_Texture : register(t0);
 SamplerState	g_SamplerState : register(s0);
-
-
 
 //=============================================================================
 // ピクセルシェーダ
@@ -49,12 +47,13 @@ void main( in  float4 inPosition		: SV_POSITION,
     
     // 応用編
     // なんか綺麗なやつ
-    #if 0
-    float noise = (fbm2(inTexCoord, 3));
+    #if 1
+    inTexCoord += Parameter;
+    float noise = (fbm2(inTexCoord * 0.5, 3));
     outDiffuse.r = (sin(noise * 30) + (voronoi2(inTexCoord) + 1.0 * 0.5)) * 0.5;
     outDiffuse.g = (sin(noise * 40) + (voronoi2(inTexCoord) + 1.0 * 0.5)) * 0.5;
     outDiffuse.b = (sin(noise * 50) + (voronoi2(inTexCoord) + 1.0 * 0.5)) * 0.5;
-    outDiffuse.rgb += voronoi2(inTexCoord);
+    outDiffuse.rgb += voronoi2(inTexCoord * 0.5);
     #else 
     
     // 紫のかっこいい
@@ -72,7 +71,7 @@ void main( in  float4 inPosition		: SV_POSITION,
     
     
     // 木目
-    #if 1
+    #if 0
     float color = fbm2(inTexCoord * 0.2, 2);
     color = (sin(color * 200) * 0.5 + 0.5);
     //color = 1 / 1 + exp((color * 200) * 0.5 + 0.5);

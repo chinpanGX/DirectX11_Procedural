@@ -1,17 +1,4 @@
-
-
-
-// 定数バッファ
-cbuffer ConstatntBuffer : register(b0)
-{
-	matrix World;
-	matrix View;
-	matrix Projection;
-
-	float4 CameraPosition;
-}
-
-
+#include "shaderHeader.hlsli"
 
 //=============================================================================
 // 頂点シェーダ
