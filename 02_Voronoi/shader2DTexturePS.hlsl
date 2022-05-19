@@ -38,31 +38,32 @@ void main( in  float4 inPosition		: SV_POSITION,
     //outDiffuse.rgb = random2D(inTexCoord);
     
     // バリューノイズ
-    //67outDiffuse.rgb = valueNoise2(inTexCoord);
+    //outDiffuse.rgb = valueNoise2(inTexCoord);
     
     // パーリンノイズ
-    outDiffuse.rgb = (perlinNoise2(inTexCoord) + 1.0) * 0.5;
+    //outDiffuse.rgb = (perlinNoise2(inTexCoord) + 1.0) * 0.5;
     
     // フラクタルパーリンノイズ
-    outDiffuse.rgb = (fbm2(inTexCoord, 3) + 1.0) * 0.3;
+    //outDiffuse.rgb = (fbm2(inTexCoord, 3) + 1.0) * 0.3;
     
     
     // 応用編
     // なんか綺麗なやつ
-    #if 0
+    #if 1
     float noise = (fbm2(inTexCoord, 3));
     outDiffuse.r = (sin(noise * 30) + (voronoi2(inTexCoord) + 1.0 * 0.5)) * 0.5;
     outDiffuse.g = (sin(noise * 40) + (voronoi2(inTexCoord) + 1.0 * 0.5)) * 0.5;
     outDiffuse.b = (sin(noise * 50) + (voronoi2(inTexCoord) + 1.0 * 0.5)) * 0.5;
     outDiffuse.rgb += voronoi2(inTexCoord);
-    #else
     
     // 紫のかっこいい
+    #else
     float noise = (fbm2(inTexCoord, 3) + 1.0) * 0.5;
     outDiffuse.r = pow((noise + 1.0) * 0.5, 2) + voronoi2(inTexCoord);
     outDiffuse.g = 0; //step(noise, 0.5);
     outDiffuse.b = step(noise, 0.5) + voronoi2(inTexCoord);
     
     #endif
+
     outDiffuse.a = 1.0;
 }
