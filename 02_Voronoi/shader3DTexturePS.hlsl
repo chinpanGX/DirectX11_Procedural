@@ -31,10 +31,15 @@ void main(  in float4 inPosition		: SV_POSITION,
     
     //outDiffuse.rgb = voronoi2(inTexCoord * 50);
     
-    float color = fbm2(inTexCoord * 5.0, 2);
+    float color = fbm3(inLocalPosition.xyz, 4);
+    
     color = (sin(color * 50) * 0.5 + 0.5);
     float3 cbrown = float3(0.7, 0.2, 0.1);
     float3 cbeige = float3(0.9, 0.7, 0.4);
+    
+    //float3 cwhite = float3(0.9, 0.9, 0.9);
+    //float3 cgray = float3(0.7, 0.7, 0.7);
+    
     // ê¸å`ï‚ä‘
     outDiffuse.rgb = cbrown * color + cbeige * (1.0 - color);
     
