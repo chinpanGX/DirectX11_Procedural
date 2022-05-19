@@ -69,8 +69,8 @@ void main(  in float4 inPosition		: SV_POSITION,
         // 線形補間
         float3 color3 = cwhite * color + cblue * (1.0 - color);
          
-        outDiffuse.rgb = sin(color3 * 10) + 1;
-        outDiffuse.gb = pow(color3, 2);
+        outDiffuse.rgb = sin(color3 * 15) + 1;
+        outDiffuse.gb = color3;
         
         //ライティング
         float3 lightDir = float3(1.0, -1.0, 1.0);
