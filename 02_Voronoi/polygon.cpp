@@ -21,15 +21,15 @@ void CPolygon::Init()
 	vertex[0].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[0].TexCoord = XMFLOAT2(0.0f, 0.0f);
 
-	vertex[1].Position = XMFLOAT3(400.0f, 0.0f, 0.0f);
+	vertex[1].Position = XMFLOAT3(200.0f, 0.0f, 0.0f);
 	vertex[1].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[1].TexCoord = XMFLOAT2(10.0f, 0.0f);
 
-	vertex[2].Position = XMFLOAT3(0.0f, 400.0f, 0.0f);
+	vertex[2].Position = XMFLOAT3(0.0f, 200.0f, 0.0f);
 	vertex[2].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[2].TexCoord = XMFLOAT2(0.0f, 10.0f);
 
-	vertex[3].Position = XMFLOAT3(400.0f, 400.0f, 0.0f);
+	vertex[3].Position = XMFLOAT3(200.0f, 200.0f, 0.0f);
 	vertex[3].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[3].TexCoord = XMFLOAT2(10.0f, 10.0f);
 
