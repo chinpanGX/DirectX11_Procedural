@@ -8,6 +8,7 @@
 #include "camera.h"
 #include "Torus.h"
 #include "Cube.h"
+#include "Dome.h"
 #include "polygon.h"
 
 class CScene
@@ -25,6 +26,7 @@ public:
 		AddGameObject<CCamera>();
 		AddGameObject<Torus>();
 		AddGameObject<Cube>();
+		AddGameObject<Dome>();
 		AddGameObject<CPolygon>();
 	}
 

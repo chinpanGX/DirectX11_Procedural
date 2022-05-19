@@ -5,9 +5,9 @@
 
 void Torus::Init()
 {
-	m_Position = XMFLOAT3(-1.0f, 0.0f, 0.0f);
+	m_Position = XMFLOAT3(-1.5f, -0.8f, 0.0f);
 	m_Rotation = XMFLOAT3(0.0f, 0.0f, 0.0f);
-	m_Scale = XMFLOAT3(0.5f, 0.5f, 0.5f);
+	m_Scale = XMFLOAT3(0.8f, 0.8f, 0.8f);
 
 
 	//Load("data/MODEL/cube.obj");
@@ -61,12 +61,10 @@ void Torus::Draw()
 	m_Shader->SetProjectionMatrix(&camera->GetProjectionMatrix());
 	m_Shader->SetCameraPosition(&camera->GetPosition());
 
-	m_Shader->Set();
-
+	
 	XMFLOAT4 parameter;
-	parameter.x = 0.0f;
-	parameter.y = 0.5f;
-	parameter.z = 1.0f;
+	parameter.x = 1.0f;
+
 	m_Shader->SetPrameter(parameter);
 	m_Shader->Set();
 

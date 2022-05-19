@@ -18,27 +18,56 @@ void main(  in float4 inPosition		: SV_POSITION,
 {
     
     //outDiffuse.rgb = voronoi2(inTexCoord * 50);
+        
+    if (Parameter.x > 0)
+    {
+        float color = fbm3(inLocalPosition.xyz, 4);    
+        color = (sin(color * 50) * 0.5 + 0.5);
+        float3 cbrown = float3(0.7, 0.2, 0.1);
+        float3 cbeige = float3(0.9, 0.7, 0.4);
     
-    float color = fbm3(inLocalPosition.xyz, 4);
-    
-    color = (sin(color * 50) * 0.5 + 0.5);
-    float3 cbrown = float3(0.7, 0.2, 0.1);
-    float3 cbeige = float3(0.9, 0.7, 0.4);
-    
-    //float3 cwhite = float3(0.9, 0.9, 0.9);
-    //float3 cgray = float3(0.7, 0.7, 0.7);
-    
-    // 線形補間
-    outDiffuse.rgb = cbrown * color + cbeige * (1.0 - color);
-    
-    
-    //ライティング
-    float3 lightDir = float3(1.0, -1.0, 1.0);
-    lightDir = normalize(lightDir);
-    
-    float light = 0.5 - dot(inNormal.xyz, lightDir) * 0.5;
-    outDiffuse.rgb *= light;
-   
-    outDiffuse.a = 1.0;
+        // 線形補間
+        outDiffuse.rgb = cbrown * color + cbeige * (1.0 - color);
   
+        //ライティング
+        float3 lightDir = float3(1.0, -1.0, 1.0);
+        lightDir = normalize(lightDir);
+    
+        float light = 0.5 - dot(inNormal.xyz, lightDir) * 0.5;
+        outDiffuse.rgb *= light;
+   
+        outDiffuse.a = 1.0;
+  
+    }
+    else if (Parameter.y > 0)
+    {
+        float color = fbm3(inWorldPosition.xyz, 3);
+        color = (sin(color * 100) * 0.5 + 0.5);
+        float3 cwhite = float3(1.0, 1.0, 1.0);
+        float3 cgray = float3(0.5, 0.5, 0.5);
+    
+        // 線形補間
+        outDiffuse.rgb = cwhite * color + cgray * (1.0 - color);
+        
+        //ライティング
+        float3 lightDir = float3(1.0, -1.0, 1.0);
+        lightDir = normalize(lightDir);
+    
+        float light = 0.5 - dot(inNormal.xyz, lightDir) * 0.5;
+        outDiffuse.rgb *= light;
+   
+        outDiffuse.a = 0.99;  
+    }
+    else
+    {
+        outDiffuse.rgb = 1.0;
+         //ライティング
+        float3 lightDir = float3(1.0, -1.0, 1.0);
+        lightDir = normalize(lightDir);
+    
+        float light = 0.5 - dot(inNormal.xyz, lightDir) * 0.5;
+        outDiffuse.rgb *= light;
+   
+        outDiffuse.a = 1.0;
+    }
 }

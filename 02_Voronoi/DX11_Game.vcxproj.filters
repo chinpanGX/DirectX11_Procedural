@@ -59,6 +59,9 @@
     <ClCompile Include="Cube.cpp">
       <Filter>ソース ファイル\game_object</Filter>
     </ClCompile>
+    <ClCompile Include="Dome.cpp">
+      <Filter>ソース ファイル\game_object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -98,6 +101,9 @@
       <Filter>ソース ファイル\game_object</Filter>
     </ClInclude>
     <ClInclude Include="Cube.h">
+      <Filter>ソース ファイル\game_object</Filter>
+    </ClInclude>
+    <ClInclude Include="Dome.h">
       <Filter>ソース ファイル\game_object</Filter>
     </ClInclude>
   </ItemGroup>
