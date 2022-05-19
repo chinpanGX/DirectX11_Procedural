@@ -43,7 +43,7 @@ void main(  in float4 inPosition		: SV_POSITION,
     {
         float color = fbm3(inWorldPosition.xyz, 3);
         color = (sin(color * 100) * 0.5 + 0.5);
-        float3 cwhite = float3(1.0, 1.0, 1.0);
+        float3 cwhite = float3(1.0, 1.0, 1.0) + 0.5;
         float3 cgray = float3(0.5, 0.5, 0.5);
     
         // 線形補間
@@ -60,11 +60,22 @@ void main(  in float4 inPosition		: SV_POSITION,
     }
     else
     {
-        outDiffuse.rgb = 1.0;
-         //ライティング
+        
+        float color = fbm3(inLocalPosition.xyz, 3);
+        color = sin(color * 50) * 0.5 + 0.5;
+        float3 cwhite = float3(0.5, 1.0, 1.0);     
+        float3 cblue = float3(0.1, 0.9, 0.9);
+        
+        // 線形補間
+        float3 color3 = cwhite * color + cblue * (1.0 - color);
+         
+        outDiffuse.rgb = sin(color3 * 10) + 1;
+        outDiffuse.gb = pow(color3, 2);
+        
+        //ライティング
         float3 lightDir = float3(1.0, -1.0, 1.0);
         lightDir = normalize(lightDir);
-    
+        
         float light = 0.5 - dot(inNormal.xyz, lightDir) * 0.5;
         outDiffuse.rgb *= light;
    

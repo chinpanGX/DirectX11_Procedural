@@ -5,7 +5,7 @@
 
 void Cube::Init()
 {
-	m_Position = XMFLOAT3(0.5f, -1.0f, 0.0f);
+	m_Position = XMFLOAT3(0.0f, -1.0f, 0.0f);
 	m_Rotation = XMFLOAT3(0.0f, 0.0f, 0.0f);
 	m_Scale = XMFLOAT3(0.5f, 0.5f, 0.5f);
 
@@ -35,15 +35,12 @@ void Cube::Uninit()
 
 void Cube::Update()
 {
-
 	m_Rotation.y += 0.02f;
 	m_Rotation.x += 0.02f;
-
 }
 
 void Cube::Draw()
 {
-
 	// マトリクス設定
 	XMMATRIX world;
 	world = XMMatrixScaling(m_Scale.x, m_Scale.y, m_Scale.z);

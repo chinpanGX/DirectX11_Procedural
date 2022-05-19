@@ -9,9 +9,6 @@
 
 #include "input.h"
 
-
-
-
 void CPolygon::Init()
 {
 	VERTEX_3D vertex[4];
@@ -48,11 +45,9 @@ void CPolygon::Init()
 
 	CRenderer::GetDevice()->CreateBuffer( &bd, &sd, &m_VertexBuffer );
 
-
 	m_Shader = new CShader();
 	m_Shader->Init( "shader2DTextureVS.cso", "shader2DTexturePS.cso" );
 	
-
 	m_Parameter.x = 0.0f;
 	m_Parameter.y = 0.0f;
 	m_Parameter.z = 0.0f;
@@ -63,7 +58,6 @@ void CPolygon::Uninit()
 {
 	m_Shader->Uninit();
 	delete m_Shader;
-
 	m_VertexBuffer->Release();
 
 }
@@ -72,13 +66,13 @@ void CPolygon::Uninit()
 void CPolygon::Update()
 {
 
-
+	m_Parameter.x += 0.02f;
+	m_Parameter.y += 0.02f;
 }
 
 
 void CPolygon::Draw()
 {
-
 	// 頂点バッファ設定
 	UINT stride = sizeof( VERTEX_3D );
 	UINT offset = 0;
@@ -95,18 +89,12 @@ void CPolygon::Draw()
 	DirectX::XMStoreFloat4x4(&projection, XMMatrixOrthographicOffCenterLH(0.0f, SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f, 0.0f, 1.0f));
 	m_Shader->SetProjectionMatrix(&projection);
 
-	m_Parameter.x += 0.02f;
-	m_Parameter.y += 0.02f;
-	
-
 	m_Shader->SetPrameter(m_Parameter);
 	m_Shader->Set();
-
 
 	// プリミティブトポロジ設定
 	CRenderer::GetDeviceContext()->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP );
 
 	// ポリゴン描画
 	CRenderer::GetDeviceContext()->Draw( 4, 0 );
-
 }

@@ -22,19 +22,14 @@ void CModel::Draw()
 		// ポリゴン描画
 		CRenderer::DrawIndexed( m_SubsetArray[i].IndexNum, m_SubsetArray[i].StartIndex, 0 );
 	}
-
 }
-
-
 
 void CModel::Load( const char *FileName )
 {
 
 	MODEL model;
 	LoadObj( FileName, &model );
-
-
-
+	   
 	// 頂点バッファ生成
 	{
 		D3D11_BUFFER_DESC bd;
@@ -50,8 +45,7 @@ void CModel::Load( const char *FileName )
 
 		CRenderer::GetDevice()->CreateBuffer( &bd, &sd, &m_VertexBuffer );
 	}
-
-
+	
 	// インデックスバッファ生成
 	{
 		D3D11_BUFFER_DESC bd;
@@ -89,23 +83,14 @@ void CModel::Load( const char *FileName )
 	delete[] model.VertexArray;
 	delete[] model.IndexArray;
 	delete[] model.SubsetArray;
-
 }
-
 
 void CModel::Unload()
 {
 	m_VertexBuffer->Release();
 	m_IndexBuffer->Release();
-
-
 	delete[] m_SubsetArray;
-
 }
-
-
-
-
 
 //モデル読込////////////////////////////////////////////
 void CModel::LoadObj( const char *FileName, MODEL *Model )
@@ -134,8 +119,7 @@ void CModel::LoadObj( const char *FileName, MODEL *Model )
 	FILE *file;
 	file = fopen( FileName, "rt" );
 	assert(file);
-
-
+	
 
 	//要素数カウント
 	while( true )
@@ -197,9 +181,7 @@ void CModel::LoadObj( const char *FileName, MODEL *Model )
 
 	Model->SubsetArray = new SUBSET[ subsetNum ];
 	Model->SubsetNum = subsetNum;
-
-
-
+	   
 
 	//要素読込
 	XMFLOAT3 *position = positionArray;
