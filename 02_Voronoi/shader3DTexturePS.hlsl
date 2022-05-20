@@ -60,7 +60,7 @@ void main(  in float4 inPosition		: SV_POSITION,
     }
     else
     {
-        
+        inLocalPosition.xy += Parameter.z;
         float color = fbm3(inLocalPosition.xyz, 3);
         color = sin(color * 50) * 0.5 + 0.5;
         float3 cwhite = float3(0.5, 1.0, 1.0);     
