@@ -5,7 +5,7 @@
 
 void Torus::Init()
 {
-	m_Position = XMFLOAT3(-2.0f, -0.8f, 0.0f);
+	m_Position = XMFLOAT3(-1.8f, -0.8f, 0.0f);
 	m_Rotation = XMFLOAT3(0.0f, 0.0f, 0.0f);
 	m_Scale = XMFLOAT3(0.7f, 0.7f, 0.7f);
 

@@ -50,7 +50,7 @@ void CPolygon::Init()
 	
 	m_Parameter.x = 0.0f;
 	m_Parameter.y = 0.0f;
-	m_Parameter.z = 0.0f;
+	m_Parameter.z = 2.0f;
 }
 
 
@@ -65,9 +65,19 @@ void CPolygon::Uninit()
 
 void CPolygon::Update()
 {
-
+	m_Count++;
 	m_Parameter.x += 0.02f;
 	m_Parameter.y += 0.02f;
+
+	if (m_Count > 60)
+	{
+		m_Parameter.z += 1.0f;
+		if (m_Parameter.z > 10.0f)
+		{
+			m_Parameter.z = 2.0f;
+		}
+		m_Count = 0;
+	}
 }
 
 

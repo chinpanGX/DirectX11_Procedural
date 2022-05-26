@@ -5,7 +5,7 @@
 
 void Cube::Init()
 {
-	m_Position = XMFLOAT3(0.0f, -1.0f, 0.0f);
+	m_Position = XMFLOAT3(0.5f, -0.7f, 0.0f);
 	m_Rotation = XMFLOAT3(0.0f, 0.0f, 0.0f);
 	m_Scale = XMFLOAT3(0.5f, 0.5f, 0.5f);
 

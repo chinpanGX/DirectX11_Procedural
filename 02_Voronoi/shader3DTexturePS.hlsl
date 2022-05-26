@@ -19,6 +19,7 @@ void main(  in float4 inPosition		: SV_POSITION,
     
     //outDiffuse.rgb = voronoi2(inTexCoord * 50);
         
+    // Torusƒ‚ƒfƒ‹
     if (Parameter.x > 0)
     {
         float color = fbm3(inLocalPosition.xyz, 4);    
@@ -39,6 +40,7 @@ void main(  in float4 inPosition		: SV_POSITION,
         outDiffuse.a = 1.0;
   
     }
+    // cubeƒ‚ƒfƒ‹
     else if (Parameter.y > 0)
     {
         float color = fbm3(inWorldPosition.xyz, 3);
@@ -58,6 +60,7 @@ void main(  in float4 inPosition		: SV_POSITION,
    
         outDiffuse.a = 0.99;  
     }
+    // Domeƒ‚ƒfƒ‹
     else
     {
         inLocalPosition.xy += Parameter.z;

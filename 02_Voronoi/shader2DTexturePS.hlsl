@@ -47,31 +47,26 @@ void main( in  float4 inPosition		: SV_POSITION,
     
     // 応用編
     // なんか綺麗なやつ
-    #if 1
     inTexCoord += Parameter;
     float noise = (fbm2(inTexCoord * 0.5, 3));
     outDiffuse.r = (sin(noise * 30) + (voronoi2(inTexCoord) + 1.0 * 0.5)) * 0.5;
     outDiffuse.g = (sin(noise * 40) + (voronoi2(inTexCoord) + 1.0 * 0.5)) * 0.5;
     outDiffuse.b = (sin(noise * 50) + (voronoi2(inTexCoord) + 1.0 * 0.5)) * 0.5;
     outDiffuse.rgb += voronoi2(inTexCoord * 0.5);
-    #else 
+    outDiffuse.a = 1.0;
     
+    #if 0
     // 紫のかっこいい
     float noise = (fbm2(inTexCoord, 3) + 1.0) * 0.5;
     outDiffuse.r = pow((noise + 1.0) * 0.5, 2) + voronoi2(inTexCoord);
     outDiffuse.g = 0; //step(noise, 0.5);
     outDiffuse.b = step(noise, 0.5) + voronoi2(inTexCoord);
-    #endif
-
-    #if 0
+    
     // 白黒
     float color = fbm2(inTexCoord * 0.5, 3) * 0.5 + 0.5;
     outDiffuse.rbg = sin(color * 50.0);
-    #endif
-    
-    
+   #endif 
     // 木目
-    #if 0
     float color = fbm2(inTexCoord * 0.2, 2);
     color = (sin(color * 200) * 0.5 + 0.5);
     //color = 1 / 1 + exp((color * 200) * 0.5 + 0.5);
@@ -81,11 +76,9 @@ void main( in  float4 inPosition		: SV_POSITION,
     outDiffuse.rgb = cbrown * color + cbeige * (1.0 - color);
     
     // コントラスト
-    //if (color > 0.5)
-    //{
-    //    outDiffuse.rgb = 1 / (1 + exp(-10 * (outDiffuse.rgb - 0.5)));
-    //}
-    
-    #endif
+    if (color > 0.5)
+    {
+        outDiffuse.rgb = 1 / (1 + exp(-Parameter.z * (outDiffuse.rgb - 0.5)));
+    }
     outDiffuse.a = 1.0;
 }
