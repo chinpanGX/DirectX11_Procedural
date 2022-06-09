@@ -50,13 +50,7 @@ void CWater::Init()
 
 	CRenderer::GetDevice()->CreateBuffer( &bd, &sd, &m_VertexBuffer );
 
-
-	m_Texture = new CTexture();
-	m_Texture->Load("data/TEXTURE/sky.tga");
-		
-
-
-	m_Position = XMFLOAT3( 0.0f, -8.0f, 0.0f );
+	m_Position = XMFLOAT3( 0.0f, 0.0f, 0.0f );
 	m_Rotation = XMFLOAT3( 0.0f, 0.0f, 0.0f );
 	m_Scale = XMFLOAT3( 1.0f, 1.0f, 1.0f );
 
@@ -74,12 +68,7 @@ void CWater::Init()
 
 void CWater::Uninit()
 {
-
 	m_VertexBuffer->Release();
-
-
-	m_Texture->Unload();
-	delete m_Texture;
 
 }
 
@@ -87,7 +76,6 @@ void CWater::Uninit()
 void CWater::Update()
 {
 	m_Time += 1.0f / 60.0f;
-
 }
 
 
@@ -99,8 +87,6 @@ void CWater::Draw()
 	UINT offset = 0;
 	CRenderer::GetDeviceContext()->IASetVertexBuffers( 0, 1, &m_VertexBuffer, &stride, &offset );
 
-	// テクスチャ設定
-	CRenderer::SetTexture( m_Texture );
 
 	// マトリクス設定
 	XMMATRIX world;

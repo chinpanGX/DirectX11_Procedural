@@ -31,13 +31,16 @@ void main( in  float4 inPosition		: POSITION0,
 	wvp = mul(World, View);
 	wvp = mul(wvp, Projection);
 
-    inPosition.y += fbm2(inTexCoord, 5) * 5;
-
+    
+    // É}ÉbÉvÇÃçÇÇ≥ÇãÅÇﬂÇÈ
+    inPosition.y += fbm2(inTexCoord * 0.1, 10) * 15.0;
+    
+    
 	outPosition = mul(inPosition, wvp);
     outWorldPosition = mul(inPosition, World);
-
+    
+    outNormal = inNormal;
 	outDiffuse = inDiffuse;
-
 	outTexCoord = inTexCoord;
 }
 

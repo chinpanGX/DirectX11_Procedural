@@ -5,9 +5,9 @@
 
 void Dome::Init()
 {
-	m_Position = XMFLOAT3(1.5f, 0.8f, 0.0f);
+	m_Position = XMFLOAT3(1.5f, 0.6f, 0.0f);
 	m_Rotation = XMFLOAT3(0.0f, 0.0f, 0.0f);
-	m_Scale = XMFLOAT3(1.0f, 1.0f, 1.0f);
+	m_Scale = XMFLOAT3(1.25f, 1.25f, 1.25f);
 	
 	m_Model = new CModel();
 	m_Model->Load("data/MODEL/sphere_smooth.obj");

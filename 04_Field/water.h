@@ -6,7 +6,6 @@ class CWater : public CGameObject
 private:
 
 	ID3D11Buffer*	m_VertexBuffer = NULL;
-	CTexture*		m_Texture = NULL;
 
 	CShader*		m_Shader;
 

@@ -127,15 +127,15 @@ float perlinNoise3(in float3 vec)
     return v3;
 }
 
-
-float fbm2(in float2 vec, int octave)
+// offset はスケールに応じた値が入る
+float fbm2(in float2 vec, int octave, float offset = 0.0)
 {
     float value;
     float amplitude = 1.0;
     
     for (int i = 0; i < octave; i++)
     {
-        value += amplitude * perlinNoise2(vec);
+        value += amplitude * perlinNoise2(vec + offset);
         vec *= 2;
         amplitude *= 0.5;
     }
@@ -152,6 +152,21 @@ float fbm3(in float3 vec, int octave)
     {
         value += amplitude * perlinNoise3(vec);
         vec *= 2;
+        amplitude *= 0.5;
+    }
+    
+    return value;
+}
+
+float fbmabs2(in float2 vec, int octave)
+{
+    float value;
+    float amplitude = 1.0;
+    
+    for (int i = 0; i < octave; i++)
+    {
+        value += amplitude * abs(perlinNoise2(vec));
+        vec *= 3;
         amplitude *= 0.5;
     }
     

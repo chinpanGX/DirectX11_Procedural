@@ -36,10 +36,9 @@ void main(  in float4 inPosition		: SV_POSITION,
     
         float light = 0.5 - dot(inNormal.xyz, lightDir) * 0.5;
         outDiffuse.rgb *= light;
-   
         outDiffuse.a = 1.0;
-  
     }
+    
     // cubeƒ‚ƒfƒ‹
     else if (Parameter.y > 0)
     {
@@ -58,8 +57,9 @@ void main(  in float4 inPosition		: SV_POSITION,
         float light = 0.5 - dot(inNormal.xyz, lightDir) * 0.5;
         outDiffuse.rgb *= light;
    
-        outDiffuse.a = 0.99;  
+        outDiffuse.a = 0.9;  
     }
+    
     // Domeƒ‚ƒfƒ‹
     else
     {

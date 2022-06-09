@@ -26,8 +26,8 @@ public:
 	{
 		AddGameObject<CCamera>();
 		AddGameObject<CField>();
-		//AddGameObject<CSky>();
-		//AddGameObject<CWater>();
+		AddGameObject<CSky>();
+		AddGameObject<CWater>();
 		//AddGameObject<CModel>();
 		//AddGameObject<CModelNormal>();
 		//AddGameObject<CPolygon>();
