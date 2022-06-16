@@ -58,10 +58,10 @@ void main( in  float4 inPosition		: SV_POSITION,
     float color = fbm2(inTexCoord * 0.2, 2);
     color = (sin(color * 200) * 0.5 + 0.5);
     //color = 1 / 1 + exp((color * 200) * 0.5 + 0.5);
-    float3 cbrown = float3(0.7, 0.2, 0.1);
+    float3 cgreen = float3(0.2, 0.7, 0.1);
     float3 cbeige = float3(0.9, 0.7, 0.4);
     // 線形補間
-    outDiffuse.rgb = cbrown * color + cbeige * (1.0 - color);
+    outDiffuse.rgb = cgreen * color + cbeige * (1.0 - color);
     
        // フォグ
     float dist = distance(inWorldPosition.xyz, CameraPosition.xyz) * 0.01;
