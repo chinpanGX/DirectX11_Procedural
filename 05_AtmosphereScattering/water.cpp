@@ -7,7 +7,7 @@
 #include "texture.h"
 #include "camera.h"
 #include "water.h"
-
+#include "atmos.h"
 
 
 
@@ -107,6 +107,9 @@ void CWater::Draw()
 	m_Shader->SetCameraPosition(&camera->GetPosition());
 
 	m_Shader->SetPrameter( XMFLOAT4(m_Time, 0.0f, 0.0f, 0.0f));
+
+	LIGHT light = CAtmos::GetInstance()->GetLight();
+	m_Shader->SetLight(light);
 
 	m_Shader->Set();
 

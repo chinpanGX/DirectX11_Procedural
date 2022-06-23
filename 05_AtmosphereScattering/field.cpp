@@ -4,7 +4,7 @@
 #include "game_object.h"
 #include "field.h"
 #include "texture.h"
-
+#include "atmos.h"
 #include "camera.h"
 
 #include "input.h"
@@ -151,7 +151,9 @@ void CField::Draw()
 	m_Shader->SetCameraPosition(&camera->GetPosition());
 
 	m_Shader->Set();
-
+	
+	LIGHT light = CAtmos::GetInstance()->GetLight();
+	m_Shader->SetLight(light);
 
 
 	// プリミティブトポロジ設定

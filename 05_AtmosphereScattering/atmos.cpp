@@ -10,13 +10,13 @@
 
 #include "camera.h"
 
-
+CAtmos* CAtmos::m_Instance = nullptr;
 
 void CAtmos::Init()
 {
 
 	float sizeXZ = 500.0f;
-	float sizeY = 100.0f;
+	float sizeY = 200.0f;
 
 	for (int z = 0; z < SKY_Z; z++)
 	{
@@ -126,11 +126,13 @@ void CAtmos::Uninit()
 
 void CAtmos::Update()
 {
+	
+	
 	if (CInput::GetKeyPress('W'))
 		m_LightRotation += 0.01f;
 	if (CInput::GetKeyPress('S'))
 		m_LightRotation -= 0.01f;
-
+	
 }
 
 
@@ -170,12 +172,10 @@ void CAtmos::Draw()
 
 	m_Shader->Set();
 
-
-	LIGHT light;
-	light.Direction = XMFLOAT4(0.0f, -cosf(m_LightRotation), sinf(m_LightRotation), 0.0f);
-	light.Diffuse = COLOR(0.9f, 0.9f, 0.9f, 1.0f);
-	light.Ambient = COLOR(0.1f, 0.1f, 0.1f, 1.0f);
-	m_Shader->SetLight(light);
+	m_Light.Direction = XMFLOAT4(0.0f, -cosf(m_LightRotation), sinf(m_LightRotation), 0.0f);
+	m_Light.Diffuse = COLOR(0.9f, 0.9f, 0.9f, 1.0f);
+	m_Light.Ambient = COLOR(0.1f, 0.1f, 0.1f, 1.0f);
+	m_Shader->SetLight(m_Light);
 
 
 	// プリミティブトポロジ設定

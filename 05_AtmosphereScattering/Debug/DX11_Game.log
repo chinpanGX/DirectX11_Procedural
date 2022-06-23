@@ -1,2 +1,4 @@
-﻿  compilation object save succeeded; see D:\プログラム4\HG41\プロシージャル_完成版\04_Field\shaderFieldPS.cso
-  DX11_Game.vcxproj -> D:\プログラム4\HG41\プロシージャル_完成版\04_Field\Debug\DX11_Game.exe
+﻿D:\�v���O����4\HG41\�v���V�[�W����_��?E?E05_AtmosphereScattering\shaderSterPS.hlsl(50,5-33): warning X3206: implicit truncation of vector type
+  
+  compilation object save succeeded; see D:\プログラム4\HG41\プロシージャル_完成版\05_AtmosphereScattering\shaderSterPS.cso
+  DX11_Game.vcxproj -> D:\プログラム4\HG41\プロシージャル_完成版\05_AtmosphereScattering\Debug\DX11_Game.exe

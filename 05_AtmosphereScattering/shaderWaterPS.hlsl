@@ -17,6 +17,20 @@ cbuffer ConstatntBuffer : register(b0)
 
 }
 
+// ライトバッファ
+struct LIGHT
+{
+    float4 Direction;
+    float4 Diffuse;
+    float4 Ambient;
+};
+
+cbuffer LightBuffer : register(b1)
+{
+    LIGHT Light;
+}
+
+
 
 
 //=============================================================================
@@ -48,9 +62,17 @@ void main( in  float4 inPosition		: SV_POSITION,
     float fresnel = saturate(1.0 + dot(eyev, normal));
     fresnel = 0.05 + (1.0 - 0.05) * pow(fresnel, 5);
     
-    float3 baseColor = float3(0.0, 0.55, 0.85);
+     // レイリー散乱
+    float3 vy = float3(0, 1, 0);
     
+    float atm = saturate(1.0 - dot(-Light.Direction.xyz, vy));
+    float3 rcolor = 1.0 - atm * 1.0;
+    
+    float ld = 0.5 - dot(Light.Direction.xyz, eyev) * 0.5;
+    
+    float3 baseColor = float3(0.0, 0.55, 0.85) - atm * ld * 1.0;
+   
     outDiffuse.rgb = baseColor * (1.0 - fresnel) + float3(0.9, 0.95, 1.0) * fresnel;
-    outDiffuse.a = fresnel + 0.75;
 
+    outDiffuse.a = fresnel;
 }

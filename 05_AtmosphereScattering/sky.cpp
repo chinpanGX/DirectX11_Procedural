@@ -7,7 +7,7 @@
 #include "texture.h"
 #include "camera.h"
 #include "sky.h"
-
+#include "atmos.h"
 
 
 
@@ -110,7 +110,8 @@ void CSky::Draw()
 
 	m_Shader->Set();
 
-
+	LIGHT light = CAtmos::GetInstance()->GetLight();
+	m_Shader->SetLight(light);
 
 	// プリミティブトポロジ設定
 	CRenderer::GetDeviceContext()->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP );

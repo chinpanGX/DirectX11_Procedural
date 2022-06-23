@@ -11,6 +11,8 @@
 #include "polygon.h"
 #include "sky.h"
 #include "water.h"
+#include "atmos.h"
+#include "Ster.h"
 
 class CScene
 {
@@ -25,9 +27,13 @@ public:
 	virtual void Init()
 	{
 		AddGameObject<CCamera>();
+		AddGameObject<CAtmos>();
 		AddGameObject<CField>();
+		AddGameObject<Ster>();
 		AddGameObject<CSky>();
+		
 		AddGameObject<CWater>();
+		
 		//AddGameObject<CModel>();
 		//AddGameObject<CModelNormal>();
 		//AddGameObject<CPolygon>();

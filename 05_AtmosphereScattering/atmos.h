@@ -4,6 +4,7 @@
 class CAtmos : public CGameObject
 {
 private:
+	static CAtmos* m_Instance;
 
 	ID3D11Buffer*	m_VertexBuffer = NULL;
 	ID3D11Buffer*	m_IndexBuffer = NULL;
@@ -21,13 +22,16 @@ private:
 
 
 	float			m_LightRotation;
-
+	LIGHT m_Light;
 
 public:
+	CAtmos() { m_Instance = this; }
+	static CAtmos* GetInstance() { return m_Instance; }
+
 	void Init();
 	void Uninit();
 	void Update();
 	void Draw();
 
-
+	LIGHT GetLight() const { return m_Light; }
 };
